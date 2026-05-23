@@ -3,7 +3,7 @@ import { type Metadata } from "next";
 import { ReactNode } from "react";
 
 export const metadata : Metadata = {
-  title: "Esperanza2k25 | Login",
+  title: "Esperanza2k26 | Login",
   description: metaDescription,
 }
 

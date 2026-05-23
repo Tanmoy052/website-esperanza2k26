@@ -129,7 +129,7 @@ body {
 
 .katibeh-regular {
   font-family: "Katibeh", serif;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
 }
 
@@ -150,3 +150,64 @@ body {
 .esperanza-blink {
   animation: esperanza-blink 0.9s linear infinite;
 }
+
+/* Custom SweetAlert2 Styles */
+.swal-container {
+  font-family: inherit;
+}
+
+.swal-popup {
+  border: 1px solid rgba(220, 38, 38, 0.3) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.swal-title {
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+.swal-content {
+  color: #d1d5db !important;
+}
+
+.swal-confirm-button {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-weight: bold !important;
+  box-shadow: 0 4px 0 #7f1d1d !important;
+  transition: all 0.15s ease !important;
+}
+
+.swal-confirm-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 0 #7f1d1d !important;
+}
+
+.swal-confirm-button:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #7f1d1d !important;
+}
+
+.swal-cancel-button {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-weight: bold !important;
+  box-shadow: 0 4px 0 #111827 !important;
+  transition: all 0.15s ease !important;
+}
+
+.swal-cancel-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 0 #111827 !important;
+}
+
+.swal-cancel-button:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #111827 !important;
+}
+

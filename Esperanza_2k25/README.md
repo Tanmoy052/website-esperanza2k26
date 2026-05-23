@@ -1,10 +1,10 @@
-# Esperanza_2k25
-This repository contains the source code for the official website of Esperanza 2k25, CGEC's annual technical extravaganza. Developed using frameworks like React and Next.js, the website serves as a central platform for event details, registrations, schedules, and real-time updates,  designed to provide a seamless and efficient user experience.
+# Esperanza_2k26
+This repository contains the source code for the official website of Esperanza 2k26, CGEC's annual technical extravaganza. Developed using frameworks like React and Next.js, the website serves as a central platform for event details, registrations, schedules, and real-time updates,  designed to provide a seamless and efficient user experience.
 
-# Esperanza 2k25 - Official Website Repository
+# Esperanza 2k26 - Official Website Repository
 
 ## 📌 Overview
-This repository contains the source code for the official website of *Esperanza 2k25*, our college's annual technical extravaganza. The website is developed using **React** and **Next.js**, ensuring a modern, fast, and dynamic user experience. It serves as a central platform for event details, registrations, schedules, and real-time updates.
+This repository contains the source code for the official website of *Esperanza 2k26*, our college's annual technical extravaganza. The website is developed using **React** and **Next.js**, ensuring a modern, fast, and dynamic user experience. It serves as a central platform for event details, registrations, schedules, and real-time updates.
 
 ## 🚀 Tech Stack
 - **Frontend:** React.js, Next.js
@@ -66,5 +66,5 @@ For any queries or collaborations, feel free to reach out:
 - **GitHub Issues:** Open an issue for feature requests or bug reports.
 
 ---
-Made with ❤️ for *Esperanza 2k25* 🚀
+Made with ❤️ for *Esperanza 2k26* 🚀
 

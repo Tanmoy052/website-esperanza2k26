@@ -7,7 +7,7 @@ const Logo = () => {
 return (
     <div>
     <div className="rotate">
-        <Image src={espLogo} alt="Esperanza 2025 Logo" width={120} height={130} />
+        <Image src={espLogo} alt="Esperanza 2026 Logo" width={60} height={65} />
     </div>
     <style jsx>
         {`

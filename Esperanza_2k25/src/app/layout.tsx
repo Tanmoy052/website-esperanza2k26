@@ -1,4 +1,5 @@
 import Footer from "@/components/Shared/Footer";
+import Providers from "@/components/Shared/Providers";
 import { metaDescription } from "@/utils/static/metaData";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Esperanza2k25 | Home",
+  title: "Esperanza2k26 | Home",
   description: metaDescription,
 };
 
@@ -29,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
         <Footer />
       </body>
     </html>

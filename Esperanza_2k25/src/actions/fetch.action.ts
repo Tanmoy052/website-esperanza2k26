@@ -6,13 +6,17 @@ import { Events } from "@/models/events.model";
 import { User } from "@/models/user.model";
 import { connectDB } from "@/utils/db/connect";
 
+const serializeDoc = (doc: any) => {
+  return JSON.parse(JSON.stringify(doc));
+};
+
 const fetchAllEvents = async (eventCategory?: "technical" | "cultural") => {
   try {
     await connectDB();
-    const events = (await Events.find({ eventCategory }).sort({
+    const events = await Events.find({ eventCategory }).sort({
       eventDate: 1,
-    })) as Event[];
-    return events;
+    });
+    return events.map(serializeDoc) as Event[];
   } catch (error: any) {
     console.log("Error fetching events: ", error.message);
     return null;
@@ -22,8 +26,8 @@ const fetchAllEvents = async (eventCategory?: "technical" | "cultural") => {
 const fetchEventByUniqueId = async (uniqueId: number) => {
   try {
     await connectDB();
-    const event = (await Events.findOne({ uniqueId })) as Event;
-    return event;
+    const event = await Events.findOne({ uniqueId });
+    return event ? serializeDoc(event) : null;
   } catch (error: any) {
     console.log("Error in fetching events: ", error.message);
     return null;
@@ -36,13 +40,10 @@ const fetchUserByEmail = async (email?: string) => {
   }
   try {
     await connectDB();
-    const user = (await User.findOne({
+    const user = await User.findOne({
       "credentials.email": email,
-    })) as UserType;
-    if (!user) {
-      return null;
-    }
-    return user;
+    });
+    return user ? serializeDoc(user) : null;
   } catch (error: any) {
     console.log("Error fetching user: ", error.message);
     return null;
@@ -60,6 +61,8 @@ const fetchRegisteredEvents = async (eventsIds: any[]) => {
         const event = await Events.findById(eventId);
         if (!event) return null;
         return {
+          _id: event._id.toString(),
+          uniqueId: event.uniqueId,
           eventName: event.eventName,
           eventDescription: event.eventDescription,
         };

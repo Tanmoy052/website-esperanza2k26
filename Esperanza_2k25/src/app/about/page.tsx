@@ -1,3 +1,5 @@
+"use client";
+
 import RadialBgRed from "@/assets/background/RadialBgRed.png";
 import AboutUs from "@/assets/images/about us.png";
 
@@ -64,9 +66,38 @@ const About = () => {
           </div>
         </div>
         <Container>
-          <video autoPlay loop muted playsInline controls width={1000} className="m-auto py-3">
-            <source src="/videos/espcgec.mp4" type="video/mp4" />
-          </video>
+<Container>
+  <video
+    autoPlay
+    loop
+    playsInline
+    muted
+    onClick={(e) => {
+      e.currentTarget.muted = !e.currentTarget.muted;
+    }}
+    className="
+      w-[95%]
+      max-w-6xl
+      m-auto
+      py-3
+      rounded-3xl
+      object-cover
+      bg-black
+      border-t-[0px]
+      border-b-[0px]
+      border-x-4
+      border-t-red-600/60
+      border-b-orange-500/70
+      border-x-red-500/50
+      shadow-[inset_0_20px_20px_-20px_rgba(255,60,0,0.5),inset_0_-20px_20px_-20px_rgba(255,120,0,0.5)]
+      transition-all
+      duration-500
+      cursor-pointer
+    "
+  >
+    <source src="/videos/espcgec.mp4" type="video/mp4" />
+  </video>
+</Container>
         </Container>
         <div className={`${katibeh.className} text-3xl mt-4`}>
           <h1 className={`text-6xl`}>

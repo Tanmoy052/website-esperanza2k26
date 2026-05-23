@@ -4,7 +4,7 @@ import { logout } from "@/actions/logout.action";
 import { LogOut } from "lucide-react";
 import { Sedgwick_Ave_Display } from "next/font/google";
 import { useRouter } from "next/navigation";
-import Swal from "sweetalert2";
+import customSwal from "@/utils/swal";
 
 const sedgwick = Sedgwick_Ave_Display({
   subsets: ["latin"],
@@ -17,11 +17,11 @@ const LogOutButton = () => {
 
   const handleLogOut = async () => {
     const response = await logout();
-    Swal.fire({
+    customSwal.fire({
       icon: response.error ? "error" : "success",
       title: response.message,
     }).then(()=>{
-      router.refresh()
+      router.push("/login")
     })
   };
 

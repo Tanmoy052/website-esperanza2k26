@@ -21,6 +21,10 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  profilePhoto: {
+    type: String,
+    default: "",
+  },
   credentials: {
     email: {
       type: String,

@@ -3,12 +3,19 @@
 import { Events } from "@/models/events.model"
 import { User } from "@/models/user.model"
 import { connectDB } from "@/utils/db/connect"
+import { getSettings } from "./settings.action"
 
 const eventRegister = async (uniqueId:number,userEmail?:string) => {
     if(!userEmail){
         return null
     }
     try {
+        const settings = await getSettings()
+        if (!settings.registrationEnabled) {
+            return {
+                message: "Registrations are currently closed"
+            }
+        }
         await connectDB()
         const user = await User.findOne({ "credentials.email" : userEmail }) 
         if(!user){

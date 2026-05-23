@@ -1,7 +1,7 @@
 "use client";
 
 import { Katibeh,Sedgwick_Ave_Display } from "next/font/google";
-import MapImage from "@/assets/images/map-image.png";
+import MapImage from "@/assets/images/map.gif";
 import Cgec from "@/assets/images/CGEC-Logo-colorful.jpg";
 import Image from "next/image";
 
@@ -40,13 +40,12 @@ const Map = () => {
       </div>
       <div onClick={() => window.open(locationInfo)} className="mt-8 lg:mt-12">
         <div className="bg-gray-900 hover:cursor-pointer rounded-3xl overflow-hidden border-2 border-white/20 h-[280px] lg:h-[350px] w-full relative">
-          <Image src={MapImage} alt="Map Image" className="object-cover" />
-          <div className="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 size-20 rounded-full">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 border-2 border-sky-500 animate-ping"></div>
+          <Image src={MapImage} alt="Map Image" className="object-cover" fill />
+          <div className="absolute z-10 top-1/5 left-1/8 transform -translate-x-1/2 -translate-y-1/2 size-30">
             <Image
               src={Cgec}
               alt="CGEC Logo"
-              className="size-20 object-contain p-1 bg-white rounded-full"
+              className="size-30 object-contain p-1 bg-white rounded-full"
             />
           </div>
         </div>

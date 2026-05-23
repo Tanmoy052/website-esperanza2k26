@@ -17,11 +17,8 @@ const karla = Karla({
 import {
   FaEye,
   FaEyeSlash,
-  FaGithub,
-  FaGoogle,
-  FaLinkedin,
 } from "react-icons/fa";
-import Swal from "sweetalert2";
+import customSwal from "@/utils/swal";
 
 const LoginSignUpForm = () => {
   const [loginTabActive, SetLoginTabActive] = useState<boolean>(true);
@@ -62,7 +59,7 @@ const LoginForm = () => {
     const err = await login(loginCredentials)
 
     if(!err){
-      Swal.fire({
+      customSwal.fire({
         title: "Login Successful",
         text: `Welcome back!`,
         icon: "success",
@@ -72,7 +69,7 @@ const LoginForm = () => {
         redirect("/")
       });
     } else {
-      Swal.fire({
+      customSwal.fire({
         title: "Login Failed",
         text: String(err) || "Something went wrong",
         icon: "error",
@@ -121,22 +118,6 @@ const LoginForm = () => {
       >
         Login
       </button>
-      <div className={`flex items-center gap-2 ${sedgwick.className}`}>
-        <span className="h-[1px] flex flex-1 bg-red-400"></span>
-        <span>Or Connect With</span>
-        <span className="h-[1px] flex flex-1 bg-red-400"></span>
-      </div>
-      <div className="flex justify-around">
-        <button className={`text-4xl bg-white p-2 rounded cursor-pointer ${sedgwick.className}`}>
-          <FaGoogle color="black" />
-        </button>
-        <button className={`text-4xl bg-white p-2 rounded cursor-pointer ${sedgwick.className}`}>
-          <FaGithub color="black" />
-        </button>
-        <button className={`text-4xl bg-white p-2 rounded cursor-pointer ${sedgwick.className}`}>
-          <FaLinkedin color="black" />
-        </button>
-      </div>
     </form>
   );
 };
@@ -160,7 +141,7 @@ const SignUpForm = () => {
 
   const handleFormSubmit = async()=>{
     if(signUpCredentials.department==="" || signUpCredentials.year===""){
-      Swal.fire({
+      customSwal.fire({
         title : "All fields are requied",
         text : "Year and Department are requierd",
         icon : "warning"
@@ -170,7 +151,7 @@ const SignUpForm = () => {
     
     const response = await signUp(signUpCredentials);
     if(response?.success){
-      Swal.fire({
+      customSwal.fire({
         title: "User Created Successfully",
         text: `User Email: ${response?.userEmail}`,
         icon: "success",
@@ -189,7 +170,7 @@ const SignUpForm = () => {
         })
       })
     }else{
-      Swal.fire({
+      customSwal.fire({
         title: "User Creation Failed",
         text: response?.error || "Something went wrong",
         icon: "error",
@@ -321,22 +302,6 @@ const SignUpForm = () => {
       >
         Sign Up
       </button>
-      <div className={`flex items-center gap-2 ${sedgwick.className}`}>
-        <span className="h-[1px] flex flex-1 bg-red-400"></span>
-        <span>Or Connect With</span>
-        <span className="h-[1px] flex flex-1 bg-red-400"></span>
-      </div>
-      <div className="flex justify-around">
-        <button className={`text-4xl bg-white p-2 rounded cursor-pointer ${sedgwick.className}`}>
-          <FaGoogle color="black" />
-        </button>
-        <button className={`text-4xl bg-white p-2 rounded cursor-pointer ${sedgwick.className}`}>
-          <FaGithub color="black" />
-        </button>
-        <button className={`text-4xl bg-white p-2 rounded cursor-pointer ${sedgwick.className}`}>
-          <FaLinkedin color="black" />
-        </button>
-      </div>
     </form>
   );
 };

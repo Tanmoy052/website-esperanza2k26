@@ -86,7 +86,7 @@ const Tech = () => {
 
         <div className="flex-1 min-w-[300px] relative top-20">
           <p className={`${sedgwick.className} text-lg text-gray-200 leading-relaxed underdog`}>
-          Step into the electrifying Tech Phase of Esperanza 2025 — a three-day extravaganza (April 22nd–24th) where innovation takes center stage! 
+          Step into the electrifying Tech Phase of Esperanza 2026 — a three-day extravaganza (April 22nd–24th) where innovation takes center stage! 
           Gear up for adrenaline-pumping hackathons, brain-teasing coding challenges, intricate bridge-making battles, mind-blowing robotics competitions, and many more events designed to test your creativity, logic, and engineering prowess. 
           Whether you're a seasoned coder, an aspiring engineer, or a curious learner, there’s a challenge waiting just for you. 
           This is more than a competition—it’s a celebration of ideas, collaboration, and pushing the boundaries of what’s possible. 

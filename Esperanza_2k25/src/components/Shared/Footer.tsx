@@ -35,7 +35,7 @@
 //                   lineHeight: '1.2'
 //                 }}
 //               >
-//                 ESPERANZA'25
+//                 ESPERANZA'26
 //               </div>
 //               <div
 //                 className="font-bold text-#DEDEDE"
@@ -186,7 +186,7 @@ const Footer = () => {
                   lineHeight: "1.2",
                 }}
               >
-                ESPERANZA'25
+                ESPERANZA'26
               </div>
               <div
                 className="font-bold text-#DEDEDE"
@@ -316,7 +316,7 @@ const Footer = () => {
           {" "}by Next JS
         </div>
         <div>
-          Esperanza 2k25 | All Right Reserved 
+          Esperanza 2k26 | All Right Reserved 
         </div>
       </div>
     </footer>

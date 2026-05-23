@@ -28,7 +28,7 @@ const Header = async() => {
     "absolute -bottom-1 left-0 w-0 h-[2px] bg-red-400 transition-all duration-300 group-hover:w-full";
 
   return (
-    <header className="fixed top-0 h-[125px] w-full z-[200] bg-black/50 backdrop-blur-sm">
+    <header className="fixed top-0 h-[80px] md:bg-black/50 md:backdrop-blur-md w-full z-[200]">
       <div className="flex justify-between items-center h-full px-4 md:px-10">
         <nav className="hidden md:flex flex-1 justify-around items-center gap-4">
           <Link

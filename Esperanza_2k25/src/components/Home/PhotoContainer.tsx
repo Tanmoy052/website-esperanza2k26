@@ -110,12 +110,12 @@ const PhotoContainer = () => {
 
 <div className="flex-1 min-w-[300px] relative top-20 left-[0] md:left-[40]">
   <div className={`${sedgwick.className} text-lg text-gray-200 leading-relaxed underdog`}>
-  <p>Welcome to Esperanza 2025, the grand annual fest of COOCHBEHAR GOVERNMENT ENGINEERING COLLEG ! This year, we bring you an electrifying fusion of technology and culture, where innovation meets creativity in an unforgettable celebration.
+  <p>Welcome to Esperanza 2026, the grand annual fest of COOCHBEHAR GOVERNMENT ENGINEERING COLLEG ! This year, we bring you an electrifying fusion of technology and culture, where innovation meets creativity in an unforgettable celebration.
 From April 22nd to April 26th, our campus will be transformed into a hub of intellect, artistry, and excitement. The first three days (April 22nd - 24th) will be dedicated to a mesmerizing technical extravaganza, featuring thrilling hackathons, coding challenges, robotics competitions, and much more. It’s your chance to push boundaries, showcase your skills, and compete with the brightest minds.
 </p>
 Then, get ready to unwind and immerse yourself in the vibrant Cultural Phase on April 25th and 26th! Experience mesmerizing music, dance, drama, fashion shows, and a celebration of diverse cultures.
 
-Join us for Esperanza 2025 – where technology sparks innovation, and culture brings us together! Stay tuned for event details, registrations, and exciting surprises.
+Join us for Esperanza 2026 – where technology sparks innovation, and culture brings us together! Stay tuned for event details, registrations, and exciting surprises.
 
 <p>Let’s make memories. Let’s make history.</p>
   </div>

@@ -12,7 +12,7 @@ const Timer = () => {
   const [remainingTime, setRemainingTime] = useState<string | null>();
   useEffect(() => {
     const interval = setInterval(() => {
-      setRemainingTime(getRemainingTime("2025-04-22T00:00:00"));
+      setRemainingTime(getRemainingTime("2026-06-16T00:00:00"));
     }, 1000);
 
     return () => clearInterval(interval);

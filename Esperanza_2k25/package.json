@@ -1,12 +1,14 @@
 {
-  "name": "esperanza2k25website",
+  "name": "esperanza2k26website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed:events": "node scripts/seed-events.mjs",
+    "seed:events:force": "node scripts/seed-events.mjs --force"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -47,9 +49,11 @@
     "autoprefixer": "10.4.15",
     "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.0",
+    "cloudinary": "^2.10.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
+    "dotenv": "^17.4.2",
     "embla-carousel-react": "^8.3.0",
     "esperanza2k25website": "file:",
     "framer-motion": "^12.6.2",
@@ -57,8 +61,10 @@
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.1",
     "motion": "^12.6.2",
+    "multer": "^2.1.1",
     "next": "15.2.4",
     "next-auth": "^5.0.0-beta.25",
+    "next-cloudinary": "^6.17.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
@@ -84,6 +90,7 @@
     "react-day-picker": "^9.6.5",
     "swiper": "^11.2.6",
     "tailwindcss": "^4",
+    "tsx": "^4.22.3",
     "typescript": "^5"
   }
 }
