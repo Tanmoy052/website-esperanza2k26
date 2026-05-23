@@ -1,4 +1,4 @@
-# Esperanza 2k26 - Setup & Architecture Guide
+# Esperanza 2k26 - Setup &amp; Architecture Guide
 
 This guide will help you set up the project locally and understand how everything works.
 
@@ -7,7 +7,6 @@ This guide will help you set up the project locally and understand how everythin
 ### Prerequisites
 - Node.js (v18 or later)
 - MongoDB (local or cloud instance like MongoDB Atlas)
-- GitHub Account (for OAuth)
 
 ### 1. Install Dependencies
 ```bash
@@ -21,36 +20,28 @@ Create a `.env.local` file in the root of `Esperanza_2k25` directory with the fo
 ```env
 # MongoDB Configuration
 MONGO_URI=mongodb://localhost:27017
-# OR for MongoDB Atlas: mongodb+srv://<username>:<password>@cluster0.mongodb.net
+# OR for MongoDB Atlas: mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.mongodb.net
 DB_NAME=esperanza2k26
 
 # NextAuth Configuration
 AUTH_SECRET=your_random_auth_secret_here
 # Generate one using: openssl rand -base64 32
 
-# GitHub OAuth (Optional but recommended)
-GITHUB_CLIENT_ID=your_github_client_id
-GITHUB_CLIENT_SECRET=your_github_client_secret
-
 # NextAuth URL (for development)
 NEXTAUTH_URL=http://localhost:3000
 ```
-
-#### How to get GitHub OAuth credentials:
-1. Go to [GitHub Settings > Developer settings > OAuth Apps](https://github.com/settings/developers)
-2. Click "New OAuth App"
-3. Fill in:
-   - Application name: Esperanza 2k26 (Local)
-   - Homepage URL: http://localhost:3000
-   - Authorization callback URL: http://localhost:3000/api/auth/callback/github
-4. Copy Client ID and Client Secret to your `.env.local`
-
 
 ### 3. Start MongoDB
 - **Local MongoDB**: Make sure MongoDB service is running on your machine
 - **MongoDB Atlas**: Ensure your IP is whitelisted in Atlas
 
-### 4. Run the Development Server
+### 4. Seed Events (Optional)
+```bash
+npm run seed:events
+# Use --force to overwrite existing events: npm run seed:events:force
+```
+
+### 5. Run the Development Server
 ```bash
 npm run dev
 ```
@@ -65,10 +56,11 @@ The site will be available at `http://localhost:3000`
 - **Framework**: Next.js 15 (Full-stack)
 - **Language**: TypeScript
 - **Database**: MongoDB + Mongoose ODM
-- **Authentication**: NextAuth v5 (Auth.js)
+- **Authentication**: NextAuth v5 (Auth.js) with Credentials Provider
 - **Styling**: Tailwind CSS
 - **Form Handling**: React Hook Form + Zod
 - **UI Components**: shadcn/ui + Radix UI
+- **Alerts**: Custom SweetAlert2 configuration with themed styling
 
 ### Directory Structure
 ```
@@ -80,20 +72,34 @@ Esperanza_2k25/
 │   │   ├── logout.action.ts  # User logout
 │   │   ├── eventRegister.action.ts
 │   │   ├── contact.action.ts
-│   │   └── fetch.action.ts
+│   │   ├── fetch.action.ts
+│   │   ├── team.action.ts    # Team management (create/join/remove)
+│   │   └── profile.action.ts # Profile updates &amp; event unregistration
 │   ├── app/                  # Next.js App Router
 │   │   ├── api/              # API Routes
-│   │   │   ├── auth/[...nextauth]/route.ts  # NextAuth endpoint
-│   │   │   └── v1/           # API v1 routes
+│   │   │   └── auth/[...nextauth]/route.ts  # NextAuth endpoint
 │   │   ├── login/            # Login/Signup page
 │   │   ├── profile/          # User profile
 │   │   ├── events/           # Events pages
 │   │   └── ...
 │   ├── components/           # React components
+│   │   ├── Events/
+│   │   │   ├── TeamManager.tsx
+│   │   │   ├── RegisterButton.tsx
+│   │   │   └── RegistrationToggle.tsx
+│   │   ├── Profile/
+│   │   │   ├── ProfileForm.tsx
+│   │   │   ├── ProfilePhotoUpload.tsx (with fire animation!)
+│   │   │   └── LogOutButton.tsx
+│   │   └── Shared/
 │   ├── models/               # Mongoose models
-│   │   └── user.model.ts     # User schema
+│   │   ├── user.model.ts
+│   │   ├── events.model.ts
+│   │   └── team.model.ts
 │   ├── utils/
-│   │   └── db/connect.ts     # MongoDB connection
+│   │   ├── db/connect.ts     # MongoDB connection
+│   │   ├── swal.ts           # Custom SweetAlert2 configuration
+│   │   └── cloudinary.ts     # Cloudinary integration for profile photos
 │   ├── interfaces/           # TypeScript interfaces
 │   └── auth.ts               # NextAuth configuration
 ```
@@ -122,7 +128,7 @@ Esperanza_2k25/
 
 4. **Note**: There's currently NO email verification implemented. The `isVerified` field in user model defaults to `false` but isn't used yet.
 
-### 2. Login Process (Credentials)
+### 2. Login Process (Credentials Only)
 1. User enters email and password in login form
 2. Form triggers `login` server action (`src/actions/login.action.ts`)
 3. The action calls `signIn("credentials", ...)` from NextAuth
@@ -133,11 +139,6 @@ Esperanza_2k25/
    - Returns user object if successful
 5. NextAuth creates a session and redirects to home page
 
-### 3. GitHub OAuth Login
-1. User clicks GitHub button (currently not wired up but provider is configured)
-2. NextAuth handles OAuth flow with GitHub
-3. User is authenticated and session is created
-
 ### User Model Schema (`src/models/user.model.ts`)
 ```typescript
 {
@@ -145,6 +146,7 @@ Esperanza_2k25/
   year: String (enum: "1st", "2nd", "3rd", "4th"),
   department: String (enum: "CE", "CSE", "ECE", "EE", "ME"),
   rollNumber: String,
+  profilePhoto: String (Cloudinary URL),
   bio: String (default: ""),
   credentials: {
     email: String (required, unique),
@@ -156,6 +158,14 @@ Esperanza_2k25/
 }
 ```
 
+### Team Management
+- **Create Team**: Users can create a team for any event
+- **Join Team**: Users can join existing teams using a unique team key
+- **Team Keys**: Auto-generated unique identifiers like "ABCD-1234"
+- **Leader Transfer**: If team leader leaves, leadership transfers to first member
+- **Team Deletion**: Empty teams are automatically deleted
+- **Populated Data**: Teams always return with fully populated leader and members
+
 ---
 
 ## 📡 Server Actions vs API Routes
@@ -163,17 +173,13 @@ Esperanza_2k25/
 ### Server Actions (Used for most operations)
 - Located in `src/actions/`
 - Directly callable from client components with `"use server"`
-- Used for: signup, login, logout, event registration, contact form
+- Used for: signup, login, logout, event registration, contact form, team management, profile updates
 
 ### API Routes
 - Located in `src/app/api/`
 - RESTful endpoints
 - Currently used for:
   - NextAuth (`/api/auth/[...nextauth]`)
-  - Event creation (`/api/v1/events/create`)
-  - Get event participants (`/api/v1/events/participants`)
-  - User creation (`/api/v1/user/create`)
-  - Get all users (`/api/v1/user/getAllUser`)
 
 ---
 
@@ -181,7 +187,7 @@ Esperanza_2k25/
 
 ### `src/auth.ts`
 - NextAuth configuration
-- Configures GitHub and Credentials providers
+- Configures **only** Credentials provider (social logins removed)
 - Defines `authorize` function for credentials login
 - Sets custom sign-in page to `/login`
 
@@ -191,28 +197,51 @@ Esperanza_2k25/
 - Reuses existing connection if available
 - Uses `MONGO_URI` and `DB_NAME` from environment variables
 
+### `src/utils/swal.ts`
+- Custom SweetAlert2 configuration
+- Themed with Esperanza's red/black gradient
+- Used for all alerts and confirmations across the app
+
 ### `src/models/user.model.ts`
 - Mongoose schema for User
 - Pre-save hook to hash passwords automatically
 - Password field has `select: false` to not return it in queries by default
+- Includes profilePhoto field for Cloudinary integration
+
+### `src/models/team.model.ts`
+- Mongoose schema for Teams
+- Stores team key, name, event, leader, and members
+- Used for team management functionality
 
 ### `src/components/Login/LoginSignUpForm.tsx`
 - Client component with login and signup tabs
 - Uses React state for form management
 - Calls server actions on form submission
-- Uses SweetAlert2 for user feedback
+- Uses custom Swal for user feedback
+- **No social login buttons** (removed for simplicity)
+
+### `src/components/Events/TeamManager.tsx`
+- Full-featured team management UI
+- Create/join teams
+- View team members and leader
+- Remove members (leader only)
+- Copy team key functionality
+
+### `src/components/Profile/ProfilePhotoUpload.tsx`
+- Profile photo upload with Cloudinary integration
+- **Fire red and black animated effect** around the profile image
+- Uses custom Swal for feedback
+- Supports images up to 5MB
 
 ---
 
-## 🚧 Current Limitations & Future Improvements
+## 🚧 Current Limitations &amp; Future Improvements
 
 ### What's Missing
 1. **Email Verification**: `isVerified` field exists but no implementation
 2. **Password Reset**: No password reset functionality
-3. **Email Service**: Nodemailer not integrated yet (mentioned in prompt.md)
-4. **Google/LinkedIn OAuth**: Buttons exist in UI but not configured
-5. **Form Validation**: Uses basic HTML5 validation, could use Zod + React Hook Form
-6. **Error Handling**: Basic error handling, could be improved
+3. **Email Service**: Nodemailer not integrated yet
+4. **Error Handling**: Basic error handling, could be improved
 
 ### How to Add Email Verification (Future)
 1. Install Nodemailer: `npm install nodemailer @types/nodemailer`
@@ -227,10 +256,12 @@ Esperanza_2k25/
 ## 📝 Available Scripts
 
 ```bash
-npm run dev      # Start dev server with Turbopack
-npm run build    # Build for production
-npm start        # Start production server
-npm run lint     # Run ESLint
+npm run dev           # Start dev server with Turbopack
+npm run build         # Build for production
+npm start             # Start production server
+npm run lint          # Run ESLint
+npm run seed:events   # Seed initial events into DB
+npm run seed:events:force  # Seed events and overwrite existing
 ```
 
 ---
@@ -245,7 +276,14 @@ npm run lint     # Run ESLint
 ### NextAuth Issues
 - Make sure `AUTH_SECRET` is set (generate with `openssl rand -base64 32`)
 - Check `NEXTAUTH_URL` is correct
-- For GitHub OAuth, verify callback URL is configured correctly
+
+### Event Registration/Unregistration Issues
+- If you can't re-register after unregistering, make sure the user was properly removed from both:
+  - `user.registeredEvents` array
+  - `event.participants` array
+
+### Team Management Issues
+- If members aren't showing up until reload, ensure the team action returns fully populated team data with leader and members
 
 ### Port Already in Use
 - Change port: `npm run dev -- -p 3001`
