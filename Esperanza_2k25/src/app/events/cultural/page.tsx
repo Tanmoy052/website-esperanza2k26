@@ -1,29 +1,14 @@
 import HexagonWhite from "@/assets/background/HexagonWhite.png";
 import RadialBgRed from "@/assets/background/RadialBgRed.png";
-import BandPic from "@/assets/images/BandPic.png";
 import CulturalHeading from "@/assets/images/CulturalHeading.png";
 import Hexagon from "@/assets/images/Hexagon.png";
-import RevolutionImg from "@/assets/images/RevolutionImg.png";
 import Container from "@/components/Shared/Container";
 import Image from "next/image";
 
 import { fetchAllEvents } from "@/actions/fetch.action";
 import { auth } from "@/auth";
 import { CardDiv } from "@/components/Shared/Card";
-import { Katibeh, Sedgwick_Ave_Display } from "next/font/google";
-
-import img from "@/assets/images/banner.png"; // Temp
-import BandSwiper from "@/components/Cultural/BandSwiper";
-
-const katibeh = Katibeh({
-  subsets: ["arabic"],
-  weight: ["400"],
-});
-
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-})
+import { sedgwick } from "@/utils/fonts";
 
 const Cultural = async() => {
   

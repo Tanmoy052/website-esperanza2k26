@@ -6,18 +6,8 @@ import star3 from "@/assets/images/Star 3.png";
 import group12 from "@/assets/images/Group12.png";
 //import { section } from "framer-motion/client";
 import Image from "next/image";
-import { Sedgwick_Ave_Display } from "next/font/google";
-import {Katibeh} from "next/font/google";
+import { sedgwick } from "@/utils/fonts";
 import React, { useEffect, useRef } from 'react';
-
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-})
-const katibeh = Katibeh({
-  subsets: ["latin"],
-  weight: ["400"],
-})
 
 
 const PhotoContainer = () => {
@@ -59,13 +49,13 @@ const PhotoContainer = () => {
     <section ref={sectionRef} className="py-16 px-8 max-w-6xl mx-auto">
 
 <div className="relative inline-block mb-12 mx-auto w-full">
-        <h1 className={`${katibeh.className} text-5xl md:text-8xl font-bold text-gray-200 text-center relative z-10 katibeh-regular`}>
+        <h1 className={`${sedgwick.className} text-5xl md:text-8xl font-bold text-gray-200 text-center relative z-10`}>
           ESPERANZA
         </h1>
 
         <svg
           ref={shadowRef}
-          className={`${katibeh.className} absolute top-7 left-4 w-full h-full katibeh-regular`}
+          className={`${sedgwick.className} absolute top-7 left-4 w-full h-full`}
           style={{
             strokeDasharray: 1000,
             strokeDashoffset: 1000,

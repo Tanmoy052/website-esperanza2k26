@@ -16,18 +16,12 @@ import TeamManager from "@/components/Events/TeamManager";
 import LoaderComponent from "@/components/Shared/Loader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Calendar, Trophy, UserMinus } from "lucide-react";
-import { Karla } from "next/font/google";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import customSwal from "@/utils/swal";
 import { sedgwick } from "@/utils/fonts";
 import RadialBgRed from "@/assets/background/RadialBgRed.png";
 import Hexagon from "@/assets/images/Hexagon.png";
-
-const karla = Karla({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 export default function Profile() {
   const router = useRouter();
@@ -85,6 +79,10 @@ export default function Profile() {
     }
   };
 
+  if (status === "loading" || isLoading) {
+    return <LoaderComponent />;
+  }
+  
   return (
     <div className="min-h-[90vh] relative overflow-hidden pt-[10px]">
       {/* Backgrounds */}

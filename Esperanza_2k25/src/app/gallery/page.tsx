@@ -6,15 +6,10 @@ import Hexagon from "@/assets/images/Hexagon.png";
 import Container from "@/components/Shared/Container";
 import GalleryHeading from "@/assets/images/GALLERY.png";
 import TechGalary from "@/assets/images/techGalary.png";
-import { Katibeh } from "next/font/google";
 import MasonryGallery from "@/components/Gallery/masonary";
 import MasonryGalleryt from "@/components/Gallery/masonaryt";
 import MasonryGallerym from "@/components/Gallery/masonarym";
 import CulturalGalary from "@/assets/images/culturalGalary.png";
-const katibeh = Katibeh({
-  subsets: ["arabic"],
-  weight: ["400"],
-});
 
 
 const galleryHeadingStyle = "translate-y-43 "; 

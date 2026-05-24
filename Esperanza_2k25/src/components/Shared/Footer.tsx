@@ -1,18 +1,8 @@
 import logo from "../../assets/logo.png";
 import Image from "next/image";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
-import { Sedgwick_Ave_Display, Roboto } from "next/font/google";
+import { sedgwick, roboto } from "@/utils/fonts";
 import Link from "next/link";
-
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["100", "300"],
-});
 
 const Footer = () => {
   const locationInfo =

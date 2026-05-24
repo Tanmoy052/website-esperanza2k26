@@ -1,18 +1,9 @@
 "use client";
 
-import { Katibeh,Sedgwick_Ave_Display } from "next/font/google";
+import { sedgwick } from "@/utils/fonts";
 import MapImage from "@/assets/images/map.gif";
 import Cgec from "@/assets/images/CGEC-Logo-colorful.jpg";
 import Image from "next/image";
-
-const katibeh = Katibeh({
-    subsets: ["arabic"],
-    weight: ["400"],
-  });
-  const sedgwick = Sedgwick_Ave_Display({
-    subsets: ["latin"],
-    weight: ["400"],
-  })
 const Map = () => {
   const locationInfo =
     "https://www.google.com/maps/place/Cooch+Behar+Government+Engineering+College/data=!4m2!3m1!1s0x0:0xe4952b5891bb2389?sa=X&ved=1t:2428&ictx=111";

@@ -7,13 +7,8 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { convertTo12HourFormat } from "@/utils/functions/timeConversion";
 import { staticEventsData } from "@/utils/static/events";
 import { Calendar, TimerIcon } from "lucide-react";
-import { Sedgwick_Ave_Display } from "next/font/google";
+import { sedgwick } from "@/utils/fonts";
 import Image from "next/image";
-
-const sedgwick = Sedgwick_Ave_Display({
-  weight: ["400"],
-  subsets: ["latin"],
-});
 
 const page = async ({ params }: any) => {
   const session = await auth();

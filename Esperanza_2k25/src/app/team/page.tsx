@@ -7,15 +7,10 @@ import Container from "@/components/Shared/Container";
 
 import { TeamMemebrsCard } from "@/components/Teams/TeamMembersCard";
 import { teamMembers } from "@/utils/static/crew";
-import { Katibeh } from "next/font/google";
+import { sedgwick } from "@/utils/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
-
-const sedgwick = Katibeh({
-  subsets: ["latin"],
-  weight: "400",
-});
 
 // const testimonials = [
 //   {

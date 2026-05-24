@@ -3,11 +3,7 @@ import { contactMessage } from "@/actions/contact.action";
 import { useState } from "react";
 import customSwal from "@/utils/swal";
 
-import { Katibeh,Sedgwick_Ave_Display } from "next/font/google";
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-})
+import { sedgwick } from "@/utils/fonts";
 const ContactUsForm = () => {
   const [formData, setFormData] = useState({
     name: "",

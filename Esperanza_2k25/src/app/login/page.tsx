@@ -1,21 +1,13 @@
 import rocket from "@/assets/images/rocket.png";
 import LoginSignUpForm from "@/components/Login/LoginSignUpForm";
 import Container from "@/components/Shared/Container";
-import { Karla,Sedgwick_Ave_Display } from "next/font/google";
+import { sedgwick, roboto } from "@/utils/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-})
-const karla = Karla({
-  subsets: ["latin"],
-  weight: "700",
-});
 const Login = async() => {
 
   const session = await auth()

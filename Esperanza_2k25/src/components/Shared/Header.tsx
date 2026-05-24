@@ -6,17 +6,7 @@ import Sidebar from "./Sidebar";
 import Image from "next/image";
 import logoTransparent from "@/assets/images/logoTransparent.png"
 
-import { Sedgwick_Ave_Display,Katibeh } from "next/font/google";
-
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-})
-const katibeh = Katibeh({
-  subsets: ["arabic"],
-  weight: ["400"],
-  // style: "normal"
-});
+import { sedgwick } from "@/utils/fonts";
 
 const Header = async() => {
 

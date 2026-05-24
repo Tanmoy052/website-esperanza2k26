@@ -10,12 +10,7 @@ import { CardDiv } from "@/components/Shared/Card";
 
 import { fetchAllEvents } from "@/actions/fetch.action";
 import { auth } from "@/auth";
-import { Sedgwick_Ave_Display } from "next/font/google";
-
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-})
+import { sedgwick } from "@/utils/fonts";
 
 
 

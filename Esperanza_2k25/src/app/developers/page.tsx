@@ -4,13 +4,8 @@ import Hexagon from "@/assets/images/Hexagon.png";
 import { CarouselCompoment } from "@/components/Shared/Carousel";
 import Container from "@/components/Shared/Container";
 import { developers } from "@/utils/static/developers";
-import { Katibeh } from "next/font/google";
+import { sedgwick } from "@/utils/fonts";
 import Image from "next/image";
-
-const katibeh = Katibeh({
-    subsets: ["arabic"],
-    weight: ["400"],
-})
 
 const Developers = () => {
   return (
@@ -36,7 +31,7 @@ const Developers = () => {
         
         <div className="md:h-[80px] md:w-[200px] lg:h-[100px] lg:w-[350px] bg-white"></div>
         <h1
-          className={`${katibeh.className} px-1 text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-center `}
+          className={`${sedgwick.className} px-1 text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-center `}
         >
           UI/UX Developers
         </h1>
@@ -51,7 +46,7 @@ const Developers = () => {
         
         <div className="md:h-[80px] md:w-[200px] lg:h-[100px] lg:w-[350px] bg-white"></div>
         <h1
-          className={`${katibeh.className} px-1 text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-center `}
+          className={`${sedgwick.className} px-1 text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-center `}
         >
           Full Stack Developers
         </h1>
@@ -66,7 +61,7 @@ const Developers = () => {
         
         <div className="md:h-[80px] md:w-[200px] lg:h-[100px] lg:w-[350px] bg-white"></div>
         <h1
-          className={`${katibeh.className} px-1 text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-center `}
+          className={`${sedgwick.className} px-1 text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-center `}
         >
           Web Content Writer
         </h1>
@@ -81,7 +76,7 @@ const Developers = () => {
         
         <div className="md:h-[80px] md:w-[200px] lg:h-[100px] lg:w-[350px] bg-white"></div>
         <h1
-          className={`${katibeh.className} px-1 text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-center `}
+          className={`${sedgwick.className} px-1 text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-center `}
         >
           Video Editor
         </h1>

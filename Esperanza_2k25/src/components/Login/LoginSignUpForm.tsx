@@ -3,17 +3,9 @@
 import { login } from "@/actions/login.action";
 import { signUp } from "@/actions/signup.action";
 import { SignUpFormPayload } from "@/interfaces/signup.interface";
-import { Sedgwick_Ave_Display,Karla } from "next/font/google";
+import { sedgwick, roboto } from "@/utils/fonts";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-})
-const karla = Karla({
-  subsets: ["latin"],
-  weight: "700",
-});
 import {
   FaEye,
   FaEyeSlash,
@@ -84,7 +76,7 @@ const LoginForm = () => {
         type="email"
         placeholder="Enter your Email address"
         required
-        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${karla.className}`}
+        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${roboto.className}`}
         value={loginCredentials.email}
         onChange={(e) => {
           setLoginCredentials({ ...loginCredentials, email: e.target.value });
@@ -94,7 +86,7 @@ const LoginForm = () => {
         <input
           type={showPassword ? "text" : "password"}
           placeholder="Enter Password"
-          className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none w-full ${karla.className}`}
+          className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none w-full ${roboto.className}`}
           required
           value={loginCredentials.password}
           onChange={(e) => {
@@ -114,7 +106,7 @@ const LoginForm = () => {
       </div>
       <button
         type="submit"
-        className={`bg-red-700 rounded-2xl cursor-pointer px-6 py-4 ${karla.className}`}
+        className={`bg-red-700 rounded-2xl cursor-pointer px-6 py-4 ${sedgwick.className}`}
       >
         Login
       </button>
@@ -185,7 +177,7 @@ const SignUpForm = () => {
         type="email"
         placeholder="Email"
         required
-        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${karla.className}`}
+        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${roboto.className}`}
         value={signUpCredentials?.credentials.email}
         onChange={(e) => {
           setSignUpCredentials({
@@ -201,7 +193,7 @@ const SignUpForm = () => {
         type="text"
         placeholder="Full Name"
         required
-        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${karla.className}`}
+        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${roboto.className}`}
         value={signUpCredentials.name}
         onChange={(e) => {
           setSignUpCredentials({
@@ -216,7 +208,7 @@ const SignUpForm = () => {
           onChange={(e) =>
             setSignUpCredentials({ ...signUpCredentials, year: e.target.value })
           }
-          className={`p-2 flex flex-1 bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${karla.className}`}
+          className={`p-2 flex flex-1 bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${roboto.className}`}
         >
           <option value="">Select Year</option>
           <option value="1st">1st</option>
@@ -232,7 +224,7 @@ const SignUpForm = () => {
               department: e.target.value,
             })
           }
-          className={`p-2 flex flex-1 bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${karla.className}`}
+          className={`p-2 flex flex-1 bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${roboto.className}`}
         >
           <option value="">Select Department</option>
           <option value="CE">CE</option>
@@ -246,7 +238,7 @@ const SignUpForm = () => {
         type="text"
         placeholder="Roll Number"
         required
-        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${karla.className}`}
+        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${roboto.className}`}
         value={signUpCredentials.rollNumber}
         onChange={(e) =>
           setSignUpCredentials({
@@ -259,7 +251,7 @@ const SignUpForm = () => {
         type="text"
         placeholder="Phone Number"
         required
-        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${karla.className}`}
+        className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none ${roboto.className}`}
         value={signUpCredentials.credentials.phoneNumber}
         onChange={(e) =>
           setSignUpCredentials({
@@ -275,7 +267,7 @@ const SignUpForm = () => {
         <input
           type={showPassword ? "text" : "password"}
           placeholder="Password"
-          className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none w-full ${karla.className}`}
+          className={`bg-white/70 placeholder:text-black/65 px-6 py-4 rounded-2xl text-black outline-none w-full ${roboto.className}`}
           required
           value={signUpCredentials.credentials.password}
           onChange={(e) =>
@@ -298,7 +290,7 @@ const SignUpForm = () => {
       </div>
       <button
         type="submit"
-        className={`bg-red-700 rounded-2xl cursor-pointer px-6 py-4 ${karla.className}`}
+        className={`bg-red-700 rounded-2xl cursor-pointer px-6 py-4 ${sedgwick.className}`}
       >
         Sign Up
       </button>

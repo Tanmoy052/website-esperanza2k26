@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import bg from "@/assets/background/HexagonWhite.png";
-import { Katibeh } from "next/font/google";
+import { sedgwick } from "@/utils/fonts";
 import { StaticImageData } from 'next/image';
 import kfc from "@/assets/sponsors/KFC.jpg"
 import devine from "@/assets/sponsors/Devine.jpg"
@@ -13,11 +13,6 @@ export interface CardData {
   imageUrl: StaticImageData;
   redirectURL?: string;
 }
-
-const katibeh = Katibeh({
-  subsets: ["arabic"],
-  weight: ["400"],
-});
 export const cards: CardData[] = [
   {
     id: 1,
@@ -108,7 +103,7 @@ const Card: React.FC<CardData> = ({ title, imageUrl, redirectURL }) => {
         
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 sm:w-16 h-0.5 sm:h-1 bg-gradient-to-r from-gray-200 to-[rgba(128,2,196,1)] transform scale-0 group-hover:scale-100 transition-transform duration-350 rounded-full"/>
         
-        <h3 className={`${katibeh.className} relative text-sm sm:text-xl font-extrabold text-center text-gray-200 group-hover:text-transparent group-hover:bg-gradient-to-r from-gray-100 to-[rgba(128,2,196,1)] group-hover:bg-clip-text transition-all duration-350 py-1 sm:py-2`}>
+        <h3 className={`${sedgwick.className} relative text-sm sm:text-xl font-extrabold text-center text-gray-200 group-hover:text-transparent group-hover:bg-gradient-to-r from-gray-100 to-[rgba(128,2,196,1)] group-hover:bg-clip-text transition-all duration-350 py-1 sm:py-2`}>
           {title}
         </h3>
         

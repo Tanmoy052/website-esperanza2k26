@@ -9,16 +9,7 @@ import Image from "next/image";
 import ContactUsForm from "@/components/About/ContactUsForm";
 import Container from "@/components/Shared/Container";
 import Map from "@/components/Shared/Map";
-import { Katibeh, Sedgwick_Ave_Display } from "next/font/google";
-
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-const katibeh = Katibeh({
-  subsets: ["arabic"],
-  weight: ["400"],
-});
+import { sedgwick } from "@/utils/fonts";
 
 const About = () => {
   return (
@@ -44,7 +35,7 @@ const About = () => {
         </Container>
       </div>
       <Container>
-        <div className={`${katibeh.className} text-3xl`}>
+        <div className={`${sedgwick.className} text-3xl`}>
           <h1 className={`text-6xl`}>
             About <span className="text-red-600">CGEC</span>
           </h1>
@@ -99,7 +90,7 @@ const About = () => {
   </video>
 </Container>
         </Container>
-        <div className={`${katibeh.className} text-3xl mt-4`}>
+        <div className={`${sedgwick.className} text-3xl mt-4`}>
           <h1 className={`text-6xl`}>
             About <span className="text-red-600">Esperanza</span>
           </h1>
