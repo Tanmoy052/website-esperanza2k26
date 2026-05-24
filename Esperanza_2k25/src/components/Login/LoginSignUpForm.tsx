@@ -4,8 +4,9 @@ import { login } from "@/actions/login.action";
 import { signUp } from "@/actions/signup.action";
 import { SignUpFormPayload } from "@/interfaces/signup.interface";
 import { sedgwick, roboto } from "@/utils/fonts";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import {
   FaEye,
   FaEyeSlash,
@@ -40,6 +41,8 @@ const LoginSignUpForm = () => {
 };
 
 const LoginForm = () => {
+  const router = useRouter();
+  const { update } = useSession();
   const [loginCredentials, setLoginCredentials] = useState({
     email: "",
     password: "",
@@ -48,22 +51,24 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleFormSubmit = async () => {
-    const err = await login(loginCredentials)
+    const result = await login(loginCredentials)
 
-    if(!err){
+    if(!result?.error){
       customSwal.fire({
         title: "Login Successful",
         text: `Welcome back!`,
         icon: "success",
         confirmButtonText: "OK",
-      }).then(() => {
+      }).then(async () => {
         setLoginCredentials({ email: "", password: "" });
-        redirect("/")
+        await update();
+        router.refresh();
+        router.push("/");
       });
     } else {
       customSwal.fire({
         title: "Login Failed",
-        text: String(err) || "Something went wrong",
+        text: String(result.error) || "Something went wrong",
         icon: "error",
         confirmButtonText: "OK",
       });

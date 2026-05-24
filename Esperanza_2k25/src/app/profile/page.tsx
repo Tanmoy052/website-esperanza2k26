@@ -25,12 +25,16 @@ import Hexagon from "@/assets/images/Hexagon.png";
 
 export default function Profile() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
   const [user, setUser] = useState<any>(null);
   const [registeredEvents, setRegisteredEvents] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const loadData = async (email: string) => {
+    setUser(null);
+    setRegisteredEvents([]);
+    setIsLoading(true);
+    
     const userData = await fetchUserByEmail(email);
     const eventsData = await fetchRegisteredEvents(
       userData?.registeredEvents as any[]
@@ -45,20 +49,18 @@ export default function Profile() {
     if (status === "loading") return;
     
     if (!session?.user?.email) {
-      if (user !== null) {
-        setUser(null);
-        setRegisteredEvents([]);
-      }
+      setUser(null);
+      setRegisteredEvents([]);
+      setIsLoading(false);
       router.push("/login");
       return;
     }
     
-    if (!user || user.credentials?.email !== session.user.email) {
-      setUser(null);
-      setRegisteredEvents([]);
-      loadData(session.user.email as string);
-    }
-  }, [session?.user?.email, status, router, user]);
+    setUser(null);
+    setRegisteredEvents([]);
+    setIsLoading(true);
+    loadData(session.user.email as string);
+  }, [session?.user?.email, status, router]);
 
   const handleUnregister = async (eventId: string, eventName: string) => {
     const result = await customSwal.fire({

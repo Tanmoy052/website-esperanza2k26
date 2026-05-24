@@ -1,7 +1,7 @@
 "use server";
 
 import { signOut } from "@/auth";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 const logout = async () => {
   try {
@@ -12,6 +12,8 @@ const logout = async () => {
     
     revalidatePath("/", "layout");
     revalidatePath("/profile");
+    revalidateTag("user");
+    revalidateTag("events");
     
     return {
       success: true,

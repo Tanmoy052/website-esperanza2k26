@@ -5,7 +5,7 @@ import { User as UserType } from "@/interfaces/user.interface";
 import { Events } from "@/models/events.model";
 import { User } from "@/models/user.model";
 import { connectDB } from "@/utils/db/connect";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 const serializeDoc = (doc: any) => {
   return JSON.parse(JSON.stringify(doc));
@@ -44,6 +44,7 @@ const fetchUserByEmail = async (email?: string) => {
     const user = await User.findOne({
       "credentials.email": email,
     });
+    revalidateTag("user");
     return user ? serializeDoc(user) : null;
   } catch (error: any) {
     console.log("Error fetching user: ", error.message);
@@ -71,6 +72,7 @@ const fetchRegisteredEvents = async (eventsIds: any[]) => {
     );
 
     // Filter out nulls (if any eventId didn't match)
+    revalidateTag("events");
     return events.filter((event) => event !== null);
   } catch (error: any) {
     console.log("Error fetching registered events: ", error.message);

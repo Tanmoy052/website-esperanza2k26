@@ -2,15 +2,10 @@
 
 import { logout } from "@/actions/logout.action";
 import { LogOut, Loader2 } from "lucide-react";
-import { Sedgwick_Ave_Display } from "next/font/google";
+import { sedgwick } from "@/utils/fonts";
 import { useRouter } from "next/navigation";
 import customSwal from "@/utils/swal";
 import { useState } from "react";
-
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-})
 
 const LogOutButton = () => {
 
@@ -25,8 +20,8 @@ const LogOutButton = () => {
       icon: response.error ? "error" : "success",
       title: response.message,
     }).then(()=>{
-      router.refresh()
-      router.push("/login")
+      router.push("/login");
+      router.refresh();
     })
   };
 
