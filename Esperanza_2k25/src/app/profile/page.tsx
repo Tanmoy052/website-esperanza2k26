@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import {
   fetchRegisteredEvents,
   fetchUserByEmail,
@@ -12,17 +13,16 @@ import ProfileForm from "@/components/Profile/ProfileForm";
 import ProfilePhotoUpload from "@/components/Profile/ProfilePhotoUpload";
 import Container from "@/components/Shared/Container";
 import TeamManager from "@/components/Events/TeamManager";
+import LoaderComponent from "@/components/Shared/Loader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Calendar, Trophy, UserMinus } from "lucide-react";
-import { Karla, Sedgwick_Ave_Display } from "next/font/google";
+import { Karla } from "next/font/google";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import customSwal from "@/utils/swal";
-
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-});
+import { sedgwick } from "@/utils/fonts";
+import RadialBgRed from "@/assets/background/RadialBgRed.png";
+import Hexagon from "@/assets/images/Hexagon.png";
 
 const karla = Karla({
   subsets: ["latin"],
@@ -51,12 +51,16 @@ export default function Profile() {
     if (status === "loading") return;
     
     if (!session?.user?.email) {
+      setUser(null);
+      setRegisteredEvents([]);
       router.push("/login");
       return;
     }
     
+    setUser(null);
+    setRegisteredEvents([]);
     loadData(session.user.email as string);
-  }, [session, status, router]);
+  }, [session?.user?.email, status, router]);
 
   const handleUnregister = async (eventId: string, eventName: string) => {
     const result = await customSwal.fire({
@@ -81,17 +85,20 @@ export default function Profile() {
     }
   };
 
-  if (isLoading || status === "loading") {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-gray-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-gray-900">
-      <div className="container mx-auto px-4 py-4 sm:py-8">
+    <div className="min-h-[90vh] relative overflow-hidden pt-[10px]">
+      {/* Backgrounds */}
+      <Image
+        src={RadialBgRed}
+        alt="background"
+        className="opacity-20 sm:opacity-40 md:opacity-55 lg:opacity-65 absolute left-1/2 transform -translate-x-1/2 z-0"
+      />
+      <Image 
+        src={Hexagon} 
+        alt="hexagon decoration" 
+        className="absolute z-0" 
+      />
+      <div className="container mx-auto px-4 py-4 sm:py-8 relative z-10">
         <div className="mb-4 sm:mb-8 justify-between flex items-center">
           <Link
             href="/"
@@ -109,7 +116,7 @@ export default function Profile() {
             <h1
               className={`${sedgwick.className} text-4xl sm:text-5xl font-extrabold text-white text-center`}
             >
-              Welcome <span className="text-red-400">{user?.name}</span>
+              Welcome <span className="text-red-400">{isLoading ? "..." : user?.name}</span>
             </h1>
             <div className="mt-8">
               <ProfilePhotoUpload
@@ -126,13 +133,24 @@ export default function Profile() {
                   Registered Events
                 </h1>
                 <span className="bg-red-600 text-white px-4 py-1 rounded-full text-lg font-bold">
-                  {registeredEvents.length}
+                  {isLoading ? "..." : registeredEvents.length}
                 </span>
               </div>
               <div
                 className={`flex flex-col gap-8 max-w-4xl mx-auto`}
               >
-                {registeredEvents?.length > 0 ? (
+                {isLoading ? (
+                  <div className="space-y-8">
+                    {[1, 2].map((i) => (
+                      <div key={i} className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-6 rounded-2xl border border-gray-700 shadow-2xl animate-pulse">
+                        <div className="h-8 bg-gray-700 rounded w-1/3 mb-4"></div>
+                        <div className="h-6 bg-gray-700 rounded w-2/3 mb-2"></div>
+                        <div className="h-4 bg-gray-700 rounded w-full mb-2"></div>
+                        <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+                      </div>
+                    ))}
+                  </div>
+                ) : registeredEvents?.length > 0 ? (
                   registeredEvents?.map((event: any) => (
                     <div
                       key={event._id}
@@ -142,15 +160,15 @@ export default function Profile() {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <Calendar className="h-5 w-5 text-red-400" />
-                            <span className="text-gray-400 text-sm font-medium uppercase tracking-wider">
+                            <span className={`text-gray-400 text-sm font-medium uppercase tracking-wider ${sedgwick.className}`}>
                               Event
                             </span>
                           </div>
-                          <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+                          <h2 className={`text-2xl sm:text-3xl font-bold mb-2 ${sedgwick.className}`}>
                             {event?.eventName}
                           </h2>
                           {event?.eventDescription && (
-                            <p className="text-gray-400 text-sm leading-relaxed">
+                            <p className={`text-gray-400 text-sm leading-relaxed ${sedgwick.className}`}>
                               {event.eventDescription}
                             </p>
                           )}
@@ -189,7 +207,14 @@ export default function Profile() {
         </Container>
         <Card className="mx-auto max-w-2xl bg-gradient-to-br from-black/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 text-white mt-8 shadow-2xl">
           <CardContent className="p-4 sm:p-6">
-            {user && (
+            {isLoading ? (
+              <div className="space-y-4 animate-pulse">
+                <div className="h-10 bg-gray-700 rounded w-full"></div>
+                <div className="h-10 bg-gray-700 rounded w-full"></div>
+                <div className="h-10 bg-gray-700 rounded w-full"></div>
+                <div className="h-12 bg-gray-600 rounded w-full"></div>
+              </div>
+            ) : user && (
               <ProfileForm
                 user={{
                   name: user?.name!,

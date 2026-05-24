@@ -164,11 +164,15 @@ body {
 
 .swal-title {
   color: #ffffff !important;
-  font-weight: bold !important;
+  font-family: var(--font-sedgwick) !important;
+  font-weight: 400 !important;
 }
 
-.swal-content {
+.swal-content,
+.swal-html-container {
   color: #d1d5db !important;
+  font-family: var(--font-sedgwick) !important;
+  font-weight: 400 !important;
 }
 
 .swal-confirm-button {
@@ -176,7 +180,8 @@ body {
   border: none !important;
   border-radius: 8px !important;
   padding: 12px 24px !important;
-  font-weight: bold !important;
+  font-family: var(--font-sedgwick) !important;
+  font-weight: 400 !important;
   box-shadow: 0 4px 0 #7f1d1d !important;
   transition: all 0.15s ease !important;
 }
@@ -196,7 +201,8 @@ body {
   border: none !important;
   border-radius: 8px !important;
   padding: 12px 24px !important;
-  font-weight: bold !important;
+  font-family: var(--font-sedgwick) !important;
+  font-weight: 400 !important;
   box-shadow: 0 4px 0 #111827 !important;
   transition: all 0.15s ease !important;
 }

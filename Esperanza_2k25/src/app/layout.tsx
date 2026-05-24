@@ -1,8 +1,9 @@
-import Footer from "@/components/Shared/Footer";
+import ConditionalFooter from "@/components/Shared/ConditionalFooter";
 import Providers from "@/components/Shared/Providers";
 import { metaDescription } from "@/utils/static/metaData";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { sedgwick, roboto } from "@/utils/fonts";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,10 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sedgwick.variable} ${roboto.variable} antialiased`}
       >
         <Providers>{children}</Providers>
-        <Footer />
+        <ConditionalFooter />
       </body>
     </html>
   );

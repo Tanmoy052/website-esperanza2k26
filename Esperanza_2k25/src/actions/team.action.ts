@@ -172,6 +172,54 @@ export const removeMemberFromTeam = async (teamId: string, memberId: string) => 
   }
 };
 
+export const transferLeadership = async (teamId: string, newLeaderId: string) => {
+  try {
+    const session = await auth();
+    if (!session?.user?.email) {
+      return { success: false, message: "Not authenticated" };
+    }
+
+    await connectDB();
+    const user = await User.findOne({ "credentials.email": session.user.email });
+    if (!user) {
+      return { success: false, message: "User not found" };
+    }
+
+    const team = await Team.findById(teamId);
+    if (!team) {
+      return { success: false, message: "Team not found" };
+    }
+
+    if (team.leader.toString() !== user._id.toString()) {
+      return { success: false, message: "Only leader can transfer leadership" };
+    }
+
+    if (!team.members.some((id: any) => id.toString() === newLeaderId.toString())) {
+      return { success: false, message: "New leader must be a team member" };
+    }
+
+    const oldLeader = team.leader;
+    team.leader = newLeaderId;
+    team.members = team.members.filter((id: any) => id.toString() !== newLeaderId.toString());
+    team.members.push(oldLeader);
+
+    await team.save();
+
+    const populatedTeam = await Team.findById(team._id)
+      .populate("leader", "name credentials.email")
+      .populate("members", "name credentials.email");
+
+    return {
+      success: true,
+      message: "Leadership transferred successfully",
+      team: serializeDoc(populatedTeam),
+    };
+  } catch (error: any) {
+    console.error("Error transferring leadership:", error);
+    return { success: false, message: "Failed to transfer leadership" };
+  }
+};
+
 export const getTeamByEvent = async (eventId: string) => {
   try {
     const session = await auth();

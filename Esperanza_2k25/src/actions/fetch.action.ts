@@ -5,6 +5,7 @@ import { User as UserType } from "@/interfaces/user.interface";
 import { Events } from "@/models/events.model";
 import { User } from "@/models/user.model";
 import { connectDB } from "@/utils/db/connect";
+import { revalidatePath } from "next/cache";
 
 const serializeDoc = (doc: any) => {
   return JSON.parse(JSON.stringify(doc));

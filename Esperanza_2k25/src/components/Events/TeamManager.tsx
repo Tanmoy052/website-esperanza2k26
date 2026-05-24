@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createTeam, joinTeam, removeMemberFromTeam, getTeamByEvent } from "@/actions/team.action";
+import { createTeam, joinTeam, removeMemberFromTeam, getTeamByEvent, transferLeadership } from "@/actions/team.action";
 import customSwal from "@/utils/swal";
 import { Copy, Check, ChevronDown, ChevronUp, UserMinus, Users, User, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -65,6 +65,31 @@ export default function TeamManager({ eventId, userEmail, onUpdate }: TeamManage
       setTeam(result.team);
     } else {
       customSwal.fire("Error!", result.message, "error");
+    }
+  };
+
+  const handleTransferLeadership = async (memberId: string, memberName: string) => {
+    if (!team?._id) return;
+    const result = await customSwal.fire({
+      title: "Transfer Leadership?",
+      text: `Are you sure you want to transfer leadership to ${memberName}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, transfer!",
+      cancelButtonText: "Cancel",
+    });
+
+    if (result.isConfirmed) {
+      const transferResult = await transferLeadership(team._id, memberId);
+      if (transferResult.success) {
+        customSwal.fire("Success!", transferResult.message, "success");
+        setTeam(transferResult.team);
+        if (onUpdate) onUpdate();
+      } else {
+        customSwal.fire("Error!", transferResult.message, "error");
+      }
     }
   };
 
@@ -177,15 +202,26 @@ export default function TeamManager({ eventId, userEmail, onUpdate }: TeamManage
                             </div>
                             <p className="text-white font-medium">{memberName}</p>
                           </div>
-                          {userEmail === (team as any).leader?.credentials?.email && member?._id && (
-                            <button
-                              onClick={() => handleRemoveMember(member._id.toString())}
-                              className="relative inline-flex items-center justify-center px-3 py-1.5 text-xs font-bold text-white transition-all duration-200 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-[0_3px_0_0_#991b1b] hover:shadow-[0_1px_0_0_#991b1b] hover:translate-y-[1px] active:shadow-none active:translate-y-[3px] rounded-md"
-                            >
-                              <UserMinus className="h-3 w-3 mr-1" />
-                              Remove
-                            </button>
-                          )}
+                          <div className="flex gap-2">
+                            {userEmail === (team as any).leader?.credentials?.email && member?._id && (
+                              <>
+                                <button
+                                  onClick={() => handleTransferLeadership(member._id.toString(), memberName)}
+                                  className="relative inline-flex items-center justify-center px-3 py-1.5 text-xs font-bold text-white transition-all duration-200 bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 shadow-[0_3px_0_0_#a16207] hover:shadow-[0_1px_0_0_#a16207] hover:translate-y-[1px] active:shadow-none active:translate-y-[3px] rounded-md"
+                                >
+                                  <Trophy className="h-3 w-3 mr-1" />
+                                  Make Leader
+                                </button>
+                                <button
+                                  onClick={() => handleRemoveMember(member._id.toString())}
+                                  className="relative inline-flex items-center justify-center px-3 py-1.5 text-xs font-bold text-white transition-all duration-200 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-[0_3px_0_0_#991b1b] hover:shadow-[0_1px_0_0_#991b1b] hover:translate-y-[1px] active:shadow-none active:translate-y-[3px] rounded-md"
+                                >
+                                  <UserMinus className="h-3 w-3 mr-1" />
+                                  Remove
+                                </button>
+                              </>
+                            )}
+                          </div>
                         </div>
                       );
                     })

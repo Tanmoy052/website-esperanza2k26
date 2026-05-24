@@ -9,6 +9,7 @@ import TechGalary from "@/assets/images/techGalary.png";
 import { Katibeh } from "next/font/google";
 import MasonryGallery from "@/components/Gallery/masonary";
 import MasonryGalleryt from "@/components/Gallery/masonaryt";
+import MasonryGallerym from "@/components/Gallery/masonarym";
 import CulturalGalary from "@/assets/images/culturalGalary.png";
 const katibeh = Katibeh({
   subsets: ["arabic"],
@@ -50,6 +51,22 @@ const About = () => {
         </Container>
       </div>
 
+      {/* Gallery Section */}
+      <div
+        className={`px-4 sm:px-8 pb-8 sm:pb-10 relative z-10 transition-all duration-300 mt-10`}
+      >
+        <Container>
+          <div className="flex justify-center mt-6 mb-6 sm:mb-8">
+            <h2 className="text-l md:text-7xl font-bold text-gray-200 katibeh-regular"></h2>
+          </div>
+        </Container>
+      </div>
+
+      {/* More Masonry Gallery */}
+      <div className="w-full mx-auto px-4 sm:px-8 pt-0 pb-10 relative z-10">
+        <MasonryGallerym />
+      </div>
+
       {/* Tech Gallery Section */}
       <div
         className={`px-4 sm:px-8 pb-8 sm:pb-10 relative z-10 transition-all duration-300 ${techGalleryStyle}`}
@@ -66,7 +83,7 @@ const About = () => {
         </Container>
       </div>
 
-      {/* Masonry Gallery */}
+      {/* Tech Masonry Gallery */}
       <div className="w-full mx-auto px-4 sm:px-8 pt-0 pb-10 relative z-10">
         <MasonryGalleryt />
       </div>

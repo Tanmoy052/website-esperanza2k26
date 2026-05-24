@@ -30,7 +30,7 @@ const Home = async() => {
       <div className="h-full">
       <HeroSection />
       <div
-        className={`pt-[250px] flex items-center box-border h-screen px-4 sm:px-6 md:px-10 lg:px-14`}
+        className={`pt-[250px] flex items-center justify-center box-border h-screen px-4 sm:px-6 md:px-10 lg:px-14`}
       >
         <EspAnimation />
       </div></div>

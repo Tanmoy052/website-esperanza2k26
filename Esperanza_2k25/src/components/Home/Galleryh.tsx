@@ -17,10 +17,61 @@ import img10 from "@/assets/Gallery/tech/teacher.jpg";
 import img9 from "@/assets/Gallery/cultural/band2.jpg";
 import img5 from "@/assets/Gallery/tech/hackathon.jpg";
 import img12 from "@/assets/Gallery/tech/sc.jpg";
-import img13 from "@/assets/Gallery/tech/tower.jpg";
+
+import newTech1 from "@/assets/2k25/tech/20250423_112131.jpg.jpeg";
+import newTech2 from "@/assets/2k25/tech/20250424_191114.jpg.jpeg";
+import newTech3 from "@/assets/2k25/tech/20250424_191712.jpg.jpeg";
+import newTech4 from "@/assets/2k25/tech/IMG20250422160553.jpg";
+import newTech5 from "@/assets/2k25/tech/IMG20250422163329_01.jpg.jpeg";
+import newTech6 from "@/assets/2k25/tech/IMG_0140.jpg";
+import newTech7 from "@/assets/2k25/tech/IMG_0142.jpg";
+import newTech8 from "@/assets/2k25/tech/IMG_0145.jpg";
+import newTech9 from "@/assets/2k25/tech/IMG_0148.jpg";
+import newTech10 from "@/assets/2k25/tech/IMG_0156.jpg";
+import newTech11 from "@/assets/2k25/tech/IMG_0157.jpg";
+import newTech12 from "@/assets/2k25/tech/IMG_0177.jpg";
+import newTech13 from "@/assets/2k25/tech/IMG_9676.jpg";
+
+import newCultural1 from "@/assets/2k25/cultural/IMG20250422123622.jpg";
+import newCultural2 from "@/assets/2k25/cultural/IMG_9437.jpg";
+import newCultural3 from "@/assets/2k25/cultural/IMG_9501.jpg";
+import newCultural4 from "@/assets/2k25/cultural/IMG_9695.jpg";
+
+import newMore1 from "@/assets/2k25/more/IMG20250422120003.jpg";
+import newMore2 from "@/assets/2k25/more/IMG20250422122557.jpg";
+import newMore3 from "@/assets/2k25/more/IMG_9439.jpg";
+import newMore4 from "@/assets/2k25/more/IMG_9462.jpg";
+import newMore5 from "@/assets/2k25/more/IMG_9468.jpg";
+import newMore6 from "@/assets/2k25/more/IMG_9761.jpg";
 
 
 const galleryImages = [
+  { id: 100, img: newMore1, alt: "Esperanza 2k25", role: "2025" },
+  { id: 101, img: newMore2, alt: "Esperanza 2k25", role: "2025" },
+  { id: 102, img: newMore3, alt: "Esperanza 2k25", role: "2025" },
+  { id: 103, img: newMore4, alt: "Esperanza 2k25", role: "2025" },
+  { id: 104, img: newMore5, alt: "Esperanza 2k25", role: "2025" },
+  { id: 105, img: newMore6, alt: "Esperanza 2k25", role: "2025" },
+
+  { id: 200, img: newTech1, alt: "Tech 2k25", role: "2025" },
+  { id: 201, img: newTech2, alt: "Tech 2k25", role: "2025" },
+  { id: 202, img: newTech3, alt: "Tech 2k25", role: "2025" },
+  { id: 203, img: newTech4, alt: "Tech 2k25", role: "2025" },
+  { id: 204, img: newTech5, alt: "Tech 2k25", role: "2025" },
+  { id: 205, img: newTech6, alt: "Tech 2k25", role: "2025" },
+  { id: 206, img: newTech7, alt: "Tech 2k25", role: "2025" },
+  { id: 207, img: newTech8, alt: "Tech 2k25", role: "2025" },
+  { id: 208, img: newTech9, alt: "Tech 2k25", role: "2025" },
+  { id: 209, img: newTech10, alt: "Tech 2k25", role: "2025" },
+  { id: 210, img: newTech11, alt: "Tech 2k25", role: "2025" },
+  { id: 211, img: newTech12, alt: "Tech 2k25", role: "2025" },
+  { id: 212, img: newTech13, alt: "Tech 2k25", role: "2025" },
+
+  { id: 300, img: newCultural1, alt: "Cultural 2k25", role: "2025" },
+  { id: 301, img: newCultural2, alt: "Cultural 2k25", role: "2025" },
+  { id: 302, img: newCultural3, alt: "Cultural 2k25", role: "2025" },
+  { id: 303, img: newCultural4, alt: "Cultural 2k25", role: "2025" },
+
   { id: 1, img: img1, alt: "", role: "r" },
   { id: 2, img: img2, alt: "", role: "" },
   { id: 3, img: img3, alt: "", role: "" },
@@ -32,8 +83,7 @@ const galleryImages = [
   { id: 9, img: img9, alt: "", role: "" },
   { id: 10, img: img10, alt: "", role: "" },
   { id: 11, img: img11, alt: "", role: "" },
-  { id: 12, img: img12, alt: "", role: "" },
-  { id: 13, img: img13, alt: "", role: "" }
+  { id: 12, img: img12, alt: "", role: "" }
 ];
 
 const cardVariants = {
@@ -138,9 +188,7 @@ export default function Gallery() {
             variants={cardVariants}
             whileHover={hoverVariants.hover}
             whileTap={{ scale: 0.98 }}
-            className={`relative rounded-xl overflow-hidden shadow-lg ${
-              idx % 5 === 0 ? "col-span-3 row-span-3 aspect-[2/1]" : "aspect-square"
-            }`}
+            className="relative rounded-xl overflow-hidden shadow-lg aspect-[4/3]"
           >
             <motion.div
               whileHover={{ scale: 1.1 }}
@@ -153,7 +201,7 @@ export default function Gallery() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                placeholder="blur"
+
               />
             </motion.div>
 

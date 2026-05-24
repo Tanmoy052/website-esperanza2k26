@@ -93,7 +93,7 @@ const Tech = () => {
           Come build, break, innovate, and ignite the future—because tech isn't just an event here, it's an experience!
           </p>
           <Link href="/events/technical" passHref legacyBehavior>
-          <a  target="_blank" className="inline-block">
+          <a className="inline-block">
           <Image
             src={explore}
             alt=""

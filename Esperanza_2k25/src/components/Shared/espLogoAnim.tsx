@@ -9,7 +9,7 @@ return (
     <div className="rotate">
         <Image src={espLogo} alt="Esperanza 2026 Logo" width={60} height={65} />
     </div>
-    <style jsx>
+    <style>
         {`
         .rotate{
         animation: spin 4000ms linear infinite;

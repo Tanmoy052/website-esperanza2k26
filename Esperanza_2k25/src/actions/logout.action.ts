@@ -1,6 +1,7 @@
 "use server";
 
 import { signOut } from "@/auth";
+import { revalidatePath } from "next/cache";
 
 const logout = async () => {
   try {
@@ -8,6 +9,10 @@ const logout = async () => {
       redirect : false,
       redirectTo : "/"
     });
+    
+    revalidatePath("/", "layout");
+    revalidatePath("/profile");
+    
     return {
       success: true,
       status: "S",

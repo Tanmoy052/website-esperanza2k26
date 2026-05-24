@@ -9,3 +9,19 @@ export interface Team {
   createdAt?: Date;
 }
 
+export interface SocialLink {
+  handler: string;
+  link: string;
+}
+
+export interface TeamMember {
+  name: string;
+  department: string;
+  year: string;
+  avatar: string;
+  category: string[];
+  lead?: string;
+  role?: string;
+  socials?: SocialLink[];
+}
+

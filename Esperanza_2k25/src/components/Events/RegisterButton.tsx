@@ -5,6 +5,7 @@ import { getSettings } from "@/actions/settings.action";
 import { useRouter } from "next/navigation";
 import customSwal from "@/utils/swal";
 import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const RegisterButton = ({
   uniqueId,
@@ -15,6 +16,7 @@ const RegisterButton = ({
 }) => {
   const router = useRouter();
   const [isRegOpen, setIsRegOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const checkSettings = async () => {
@@ -46,7 +48,10 @@ const RegisterButton = ({
       return;
     }
 
+    setIsLoading(true);
     const res = await eventRegister(uniqueId, userEmail);
+    setIsLoading(false);
+    
     if (res) {
       if (res.error) {
         customSwal.fire({
@@ -72,8 +77,10 @@ const RegisterButton = ({
     <button
       type="button"
       onClick={handleRegisterForEvent}
-      className="relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-200 bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 shadow-[0_4px_0_0_#9d174d] hover:shadow-[0_2px_0_0_#9d174d] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] rounded-lg"
+      disabled={isLoading}
+      className="relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-200 bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 shadow-[0_4px_0_0_#9d174d] hover:shadow-[0_2px_0_0_#9d174d] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
     >
+      {isLoading ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : null}
       Register
     </button>
   );

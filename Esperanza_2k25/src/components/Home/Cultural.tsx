@@ -106,7 +106,7 @@ const Cultural = () => {
           inspire the young minds to step beyond the box and fuel the passion - and celebrate all beautiful souls of arts .
           </p>
           <Link href="/events/cultural" passHref legacyBehavior>
-          <a target="_blank" className="inline-block">
+          <a className="inline-block">
           <Image
           src={explore}
           alt=""

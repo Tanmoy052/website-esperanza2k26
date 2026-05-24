@@ -108,7 +108,7 @@ export const AnimatedTestimonials = ({
               {testimonials[active].year} - {testimonials[active].department}
             </p>
             <motion.p className="mt-4 text-lg text-gray-500 dark:text-neutral-300 capitalize">
-              {testimonials[active].lead?.split(" ").map((word, index) => (
+              {testimonials[active].lead?.split(" ").map((word: string, index: number) => (
                 <motion.span
                   key={index}
                   initial={{
@@ -134,7 +134,7 @@ export const AnimatedTestimonials = ({
             </motion.p>
             <motion.div>
               <div className="flex justify-start gap-5 my-3 relative z-20">
-                {testimonials[active].socials?.map((s, i) => {
+                {testimonials[active].socials?.map((s: any, i: number) => {
                   let icon = null;
                   if (s.handler === "Facebook") {
                     icon = <FaFacebook size={35} color="white" />;

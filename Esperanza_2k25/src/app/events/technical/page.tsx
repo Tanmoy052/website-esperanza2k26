@@ -10,6 +10,12 @@ import { CardDiv } from "@/components/Shared/Card";
 
 import { fetchAllEvents } from "@/actions/fetch.action";
 import { auth } from "@/auth";
+import { Sedgwick_Ave_Display } from "next/font/google";
+
+const sedgwick = Sedgwick_Ave_Display({
+  subsets: ["latin"],
+  weight: ["400"],
+})
 
 
 
@@ -65,7 +71,6 @@ const Technical = async() => {
                     key={i}
                     DateContent={event.eventDate}
                     uniqueId={event.uniqueId!}
-                    userEmail={session?.user?.email as string}
                   />
                 );
               } else {
@@ -76,7 +81,6 @@ const Technical = async() => {
                     key={i}
                     DateContent={event.eventDate}
                     uniqueId={event.uniqueId!}
-                    userEmail={session?.user?.email as string}
                   />
                 );
               }

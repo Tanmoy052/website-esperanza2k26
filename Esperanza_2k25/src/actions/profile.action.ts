@@ -67,13 +67,14 @@ export const unregisterFromEvent = async (eventId: string) => {
     if (team) {
       if (team.leader.toString() === user._id.toString()) {
         if (team.members.length > 0) {
-          team.leader = team.members[0]._id;
-          team.members = team.members.filter((m: any) => m._id.toString() !== team.members[0]._id.toString());
+          const newLeaderId = team.members[0];
+          team.leader = newLeaderId;
+          team.members = team.members.filter((m: any) => m.toString() !== newLeaderId.toString());
         } else {
           await Team.findByIdAndDelete(team._id);
         }
       } else {
-        team.members = team.members.filter((m: any) => m._id.toString() !== user._id.toString());
+        team.members = team.members.filter((m: any) => m.toString() !== user._id.toString());
       }
       
       if (team.leader) {

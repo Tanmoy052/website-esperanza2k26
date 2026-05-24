@@ -7,12 +7,12 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { convertTo12HourFormat } from "@/utils/functions/timeConversion";
 import { staticEventsData } from "@/utils/static/events";
 import { Calendar, TimerIcon } from "lucide-react";
-import { Sedgwick_Ave } from "next/font/google";
+import { Sedgwick_Ave_Display } from "next/font/google";
 import Image from "next/image";
 
-const sedgwick = Sedgwick_Ave({
-  weight: "400",
-  subsets: ["latin-ext"],
+const sedgwick = Sedgwick_Ave_Display({
+  weight: ["400"],
+  subsets: ["latin"],
 });
 
 const page = async ({ params }: any) => {
@@ -26,7 +26,7 @@ const page = async ({ params }: any) => {
   const words = event?.eventName.split(" ").map((w) => ({ text: w }));
 
   return (
-    <div className={`mt-[125px] min-h-screen relative`}>
+    <div className={`mt-[125px] min-h-screen relative ${sedgwick.className}`}>
       <Image
         src={RadialBgRed}
         alt=""

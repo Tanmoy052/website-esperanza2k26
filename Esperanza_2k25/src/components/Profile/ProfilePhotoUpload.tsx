@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { uploadProfilePhoto } from "@/actions/profile.action";
 import { UserCircle2, Camera, Loader2 } from "lucide-react";
 import Image from "next/image";
@@ -17,6 +17,10 @@ export default function ProfilePhotoUpload({
 }: ProfilePhotoUploadProps) {
   const [photo, setPhoto] = useState<string | undefined>(currentPhoto);
   const [isUploading, setIsUploading] = useState(false);
+
+  useEffect(() => {
+    setPhoto(currentPhoto);
+  }, [currentPhoto]);
 
   const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -56,7 +60,7 @@ export default function ProfilePhotoUpload({
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="relative">
-        <style jsx>{`
+        <style>{`
           @keyframes fireSpin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }

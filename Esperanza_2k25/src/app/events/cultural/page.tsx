@@ -47,19 +47,7 @@ const Cultural = async() => {
           />
         </Container>
       </div>
-      <div className="flex justify-between items-center">
 
-        {/* Band at a glance */}
-        
-        <div className="md:h-[80px] md:w-[200px] lg:h-[100px] lg:w-[350px] bg-white"></div>
-        <h1
-          className={`${sedgwick.className} text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-center `}
-        >
-          Band at a glance
-        </h1>
-        <div className="md:h-[80px] md:w-[200px] lg:h-[100px] lg:w-[350px] bg-white"></div>
-      </div>
-      <BandSwiper/>
       {/* <div className="mt-4 md:mt-10 relative">
         <Image src={BandPic} alt="" className="object-cover" />
         <Image src={RevolutionImg} alt="" className="absolute bottom-4 left-[50%] translate-x-[-50%]" />
@@ -94,7 +82,6 @@ const Cultural = async() => {
                     key={i}
                     DateContent={event.eventDate}
                     uniqueId={event.uniqueId!}
-                    userEmail={session?.user?.email as string}
                     nonRegisterable={event.nonRegisterable}
                   />
                 );
@@ -106,7 +93,6 @@ const Cultural = async() => {
                     key={i}
                     DateContent={event.eventDate}
                     uniqueId={event.uniqueId!}
-                    userEmail={session?.user?.email as string}
                     nonRegisterable={event.nonRegisterable}
                   />
                 );
