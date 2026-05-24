@@ -19,7 +19,7 @@ const Footer = () => {
     "https://www.google.com/maps/place/Cooch+Behar+Government+Engineering+College/data=!4m2!3m1!1s0x0:0xe4952b5891bb2389?sa=X&ved=1t:2428&ictx=111";
 
   return (
-    <footer className="bg-black text-[#DEDEDE] py-2 px-2 sm:py-3 sm:px-3 border-t border-gray-200 relative z-10">
+    <footer className="text-[#DEDEDE] m-[30px] p-[30px] py-2 px-2 sm:py-3 sm:px-3 relative z-10">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-4 sm:gap-6">
           <div className="flex flex-col items-center md:items-start gap-2">
