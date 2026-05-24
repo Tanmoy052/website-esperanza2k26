@@ -82,15 +82,13 @@ const Tech = () => {
           This is more than a competition—it’s a celebration of ideas, collaboration, and pushing the boundaries of what’s possible. 
           Come build, break, innovate, and ignite the future—because tech isn't just an event here, it's an experience!
           </p>
-          <Link href="/events/technical" passHref legacyBehavior>
-          <a className="inline-block">
+          <Link href="/events/technical" className="inline-block">
           <Image
             src={explore}
             alt=""
             width={270}
             className='pt-[50] w-[75%] md:w-full hover:scale-108 transition-transform duration-300 cursor-pointer'
           />
-          </a>
           </Link>
         </div>
 

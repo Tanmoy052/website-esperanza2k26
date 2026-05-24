@@ -74,15 +74,13 @@ const Team = () => {
       </div>
       <Container>
         <div className="flex justify-center relative z-50">
-          <Link href="/developers" passHref legacyBehavior className="">
-            <a target="_blank" className="inline-block w-[90%] md:max-w-[300px] pb-15 m-auto animate-pulse duration-200 hover:animate-none">
+          <Link href="/developers" target="_blank" className="inline-block w-[90%] md:max-w-[300px] pb-15 m-auto animate-pulse duration-200 hover:animate-none">
               <Image
                 src={meetOurDevelopers}
                 alt=""
                 width={270}
                 className="pt-[20] w-full m-auto hover:scale-108 transition-transform duration-300 cursor-pointer"
               />
-            </a>
           </Link>
         </div>
       </Container>
