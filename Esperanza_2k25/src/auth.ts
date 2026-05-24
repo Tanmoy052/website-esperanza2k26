@@ -17,9 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const password = credentials.password as string;
 
         if (!email || !password) {
-          throw new CredentialsSignin({
-            cause: "Missing credentials",
-          });
+          throw new CredentialsSignin("Missing credentials");
         }
         await connectDB();
 
@@ -28,20 +26,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         );
 
         if (!user) {
-          throw new CredentialsSignin({
-            cause: "User not found",
-          });
+          throw new CredentialsSignin("User not found");
         }
         if (!user.credentials?.password) {
-          throw new CredentialsSignin({
-            cause: "Password not found",
-          });
+          throw new CredentialsSignin("Password not found");
         }
         const isMatch = await compare(password, user.credentials.password);
         if (!isMatch) {
-          throw new CredentialsSignin({
-            cause: "Wrong Password",
-          });
+          throw new CredentialsSignin("Wrong Password");
         } else {
           return {
             name: user.name,
