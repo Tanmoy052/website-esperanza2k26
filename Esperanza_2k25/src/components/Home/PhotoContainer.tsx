@@ -109,15 +109,13 @@ Join us for Esperanza 2026 – where technology sparks innovation, and culture b
 
 <p>Let’s make memories. Let’s make history.</p>
   </div>
-  <Link href="brochure/brochure.pdf" passHref legacyBehavior>
-  <a target="_blank" className="inline-block">
+  <Link href="brochure/brochure.pdf" target="_blank" className="inline-block">
   <Image
   src={group12}
   alt=""
   width={270}
   className='pt-[50] w-[75%] md:w-full hover:scale-108 transition-transform duration-300 cursor-pointer'
   />
-  </a>
   </Link>
 </div>
 </div>

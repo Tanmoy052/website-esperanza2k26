@@ -45,16 +45,20 @@ export default function Profile() {
     if (status === "loading") return;
     
     if (!session?.user?.email) {
-      setUser(null);
-      setRegisteredEvents([]);
+      if (user !== null) {
+        setUser(null);
+        setRegisteredEvents([]);
+      }
       router.push("/login");
       return;
     }
     
-    setUser(null);
-    setRegisteredEvents([]);
-    loadData(session.user.email as string);
-  }, [session?.user?.email, status, router]);
+    if (!user || user.credentials?.email !== session.user.email) {
+      setUser(null);
+      setRegisteredEvents([]);
+      loadData(session.user.email as string);
+    }
+  }, [session?.user?.email, status, router, user]);
 
   const handleUnregister = async (eventId: string, eventName: string) => {
     const result = await customSwal.fire({
