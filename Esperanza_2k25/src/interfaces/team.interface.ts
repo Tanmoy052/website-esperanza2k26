@@ -1,4 +1,6 @@
 
+import { StaticImageData } from "next/image";
+
 export interface Team {
   _id?: string;
   teamKey: string;
@@ -18,7 +20,7 @@ export interface TeamMember {
   name: string;
   department: string;
   year: string;
-  avatar: string;
+  avatar: string | StaticImageData;
   category: string[];
   lead?: string;
   role?: string;

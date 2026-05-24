@@ -18,7 +18,7 @@ const page = async ({ params }: any) => {
   const event = await fetchEventByUniqueId(uniqueId);
   const poster = staticEventsData.find((e) => e.uniqueId == uniqueId)?.poster;
 
-  const words = event?.eventName.split(" ").map((w) => ({ text: w }));
+  const words = event?.eventName.split(" ").map((w: string) => ({ text: w }));
 
   return (
     <div className={`mt-[125px] min-h-screen relative ${sedgwick.className}`}>
@@ -63,7 +63,7 @@ const page = async ({ params }: any) => {
                     : "Event Lead"}
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {event?.leads.map((l, i) => (
+                  {event?.leads.map((l: any, i: number) => (
                     <div
                       className="px-4 py-3 bg-black/30 backdrop-blur-sm"
                       key={i}

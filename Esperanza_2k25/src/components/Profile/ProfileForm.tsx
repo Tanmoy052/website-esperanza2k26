@@ -15,14 +15,9 @@ import { Edit, Save, X, Check } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Sedgwick_Ave_Display} from "next/font/google";
+import { sedgwick } from "@/utils/fonts";
 import { updateProfile } from "@/actions/profile.action";
 import customSwal from "@/utils/swal";
-
-const sedgwick = Sedgwick_Ave_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-})
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -32,6 +27,7 @@ const formSchema = z.object({
     .min(8, "Phone number must be at least 8 characters"),
   rollNumber: z.string().min(8, "Roll number must be at least 8 characters"),
   year: z.string().min(1, "Please select a year"),
+  email: z.string().optional(),
 });
 
 const ProfileForm = ({
@@ -59,6 +55,7 @@ const ProfileForm = ({
       phoneNumber: user?.phoneNumber || "",
       rollNumber: user?.rollNumber || "",
       year: user?.year || "",
+      email: user?.email || "",
     },
   });
 
@@ -158,12 +155,12 @@ const ProfileForm = ({
         <FormField
           control={form.control}
           name="email"
-          render={() => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel className={`${sedgwick.className} text-sm sm:text-base`}>Email</FormLabel>
               <FormControl>
                 <Input
-                  value={user?.email || ""}
+                  {...field}
                   className="bg-gray-800/50 text-sm sm:text-base text-gray-400"
                   disabled
                 />
