@@ -6,6 +6,7 @@ import { uploadProfilePhoto } from "@/actions/profile.action";
 import { UserCircle2, Camera, Loader2 } from "lucide-react";
 import Image from "next/image";
 import customSwal from "@/utils/swal";
+import imageCompression from "browser-image-compression";
 
 interface ProfilePhotoUploadProps {
   currentPhoto?: string;
@@ -31,13 +32,14 @@ export default function ProfilePhotoUpload({
       return;
     }
 
-    if (file.size > 5 * 1024 * 1024) {
-      customSwal.fire("Error!", "Image size must be less than 5MB", "error");
-      return;
-    }
-
     setIsUploading(true);
     try {
+      const compressedFile = await imageCompression(file, {
+        maxSizeMB: 0.5,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      });
+
       const reader = new FileReader();
       reader.onloadend = async () => {
         const base64 = reader.result as string;
@@ -49,7 +51,7 @@ export default function ProfilePhotoUpload({
           customSwal.fire("Error!", result.message, "error");
         }
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(compressedFile);
     } catch (error) {
       customSwal.fire("Error!", "Failed to upload photo", "error");
     } finally {
