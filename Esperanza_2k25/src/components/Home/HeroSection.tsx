@@ -12,6 +12,7 @@ export default function HeroSection() {
           loop
           muted
           playsInline
+          preload="metadata"
         >
           <source src="/videos/bgvido.mp4" type="video/mp4" />
           Your browser does not support the video tag.
