@@ -1,0 +1,100 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Users, Calendar, UserRound, MessageSquare, UsersRound, Settings } from "lucide-react";
+import { getDashboardStats } from "@/actions/admin/dashboard.action";
+
+interface DashboardStats {
+  totalUsers: number;
+  totalEvents: number;
+  totalRegistrations: number;
+  totalMessages: number;
+}
+
+export default function AdminDashboard() {
+  const [stats, setStats] = useState<DashboardStats>({
+    totalUsers: 0,
+    totalEvents: 0,
+    totalRegistrations: 0,
+    totalMessages: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadStats = async () => {
+      try {
+        const data = await getDashboardStats();
+        setStats(data);
+      } catch (error) {
+        console.error("Error loading dashboard stats:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadStats();
+  }, []);
+
+  const statCards = [
+    {
+      title: "Total Users",
+      value: stats.totalUsers,
+      icon: Users,
+      color: "from-blue-600 to-blue-700",
+    },
+    {
+      title: "Total Events",
+      value: stats.totalEvents,
+      icon: Calendar,
+      color: "from-green-600 to-green-700",
+    },
+    {
+      title: "Registrations",
+      value: stats.totalRegistrations,
+      icon: UserRound,
+      color: "from-purple-600 to-purple-700",
+    },
+    {
+      title: "Messages",
+      value: stats.totalMessages,
+      icon: MessageSquare,
+      color: "from-orange-600 to-orange-700",
+    },
+  ];
+
+  return (
+    <div className="space-y-4">
+      <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+        Dashboard
+      </h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {statCards.map((card, index) => (
+          <Card
+            key={index}
+            className="bg-gray-900/80 border-gray-700 shadow-xl hover:shadow-2xl transition-shadow duration-300"
+          >
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-400">
+                {card.title}
+              </CardTitle>
+              <div className={`p-2 rounded-lg bg-gradient-to-br ${card.color}`}>
+                <card.icon className="h-5 w-5 text-white" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-white">
+                {loading ? (
+                  <div className="h-9 w-20 bg-gray-800 rounded animate-pulse" />
+                ) : (
+                  card.value
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}

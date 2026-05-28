@@ -36,8 +36,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           throw new CredentialsSignin("Wrong Password");
         } else {
           return {
+            id: user._id.toString(),
             name: user.name,
             email: user.credentials.email,
+            role: user.role,
           };
         }
       },
@@ -45,5 +47,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   pages: {
     signIn: "/login",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role as "user" | "admin";
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as "user" | "admin";
+      }
+      return session;
+    },
   },
 });

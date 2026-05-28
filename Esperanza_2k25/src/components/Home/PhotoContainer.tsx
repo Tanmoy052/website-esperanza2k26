@@ -99,16 +99,50 @@ const PhotoContainer = () => {
 </div>
 
 <div className="flex-1 min-w-[300px] relative top-20 left-[0] md:left-[40]">
-  <div className={`${sedgwick.className} text-lg text-gray-200 leading-relaxed underdog`}>
-  <p>Welcome to Esperanza 2026, the grand annual fest of COOCHBEHAR GOVERNMENT ENGINEERING COLLEG ! This year, we bring you an electrifying fusion of technology and culture, where innovation meets creativity in an unforgettable celebration.
-From April 22nd to April 26th, our campus will be transformed into a hub of intellect, artistry, and excitement. The first three days (April 22nd - 24th) will be dedicated to a mesmerizing technical extravaganza, featuring thrilling hackathons, coding challenges, robotics competitions, and much more. It’s your chance to push boundaries, showcase your skills, and compete with the brightest minds.
-</p>
-Then, get ready to unwind and immerse yourself in the vibrant Cultural Phase on April 25th and 26th! Experience mesmerizing music, dance, drama, fashion shows, and a celebration of diverse cultures.
+<div className={`${sedgwick.className} text-lg text-gray-200 leading-relaxed underdog space-y-5`}>
 
-Join us for Esperanza 2026 – where technology sparks innovation, and culture brings us together! Stay tuned for event details, registrations, and exciting surprises.
+  <p>
+    Welcome to{" "}
+    <span className="bg-yellow-400/20 text-yellow-300 px-2 py-1 rounded-md">
+      Esperanza’26
+    </span>
+    , the grand Tech Cum Cultural Fest of{" "}CGEC
+    , happening from{" "}
+    <span className="bg-pink-400/20 text-pink-300 px-2 py-1 rounded-md">
+      16th–20th June 2026
+    </span>.
+  </p>
 
-<p>Let’s make memories. Let’s make history.</p>
-  </div>
+  <p>
+    The first three days will feature exciting{" "}
+    <span className="bg-purple-400/20 text-purple-300 px-2 py-1 rounded-md">
+      technical events
+    </span>{" "}
+    including hackathons, coding contests, robotics, esports, web & app
+    development, quizzes, and many more innovation-driven challenges designed
+    to inspire creativity and competition.
+  </p>
+
+  <p>
+    The final two days will light up the campus with{" "}
+    <span className="bg-red-400/20 text-red-300 px-2 py-1 rounded-md">
+      vibrant cultural celebrations
+    </span>{" "}
+    featuring music, dance, fashion shows, art, performances, and unforgettable
+    moments of talent and expression.
+  </p>
+
+  <p>
+    Esperanza’26 says : — <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-amber-400/20 via-orange-400/20 to-yellow-300/20 border border-amber-300/20 text-amber-200 tracking-[0.25em] uppercase text-sm backdrop-blur-md shadow-lg">
+  "Where Technology Meets Culture & Innovation Meets Tradition"
+</span>
+  </p>
+
+  <p className="text-xl text-white">
+    Let’s create memories. Let’s create history.
+  </p>
+
+</div>
   <Link href="brochure/brochure.pdf" target="_blank" className="inline-block">
   <Image
   src={group12}

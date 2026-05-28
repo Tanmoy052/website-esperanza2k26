@@ -1,19 +1,57 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import HexagonWhite from "@/assets/background/HexagonWhite.png";
 import RadialBgRed from "@/assets/background/RadialBgRed.png";
 import CulturalHeading from "@/assets/images/CulturalHeading.png";
 import Hexagon from "@/assets/images/Hexagon.png";
 import Container from "@/components/Shared/Container";
 import Image from "next/image";
+import { Input } from "@/components/ui/input";
 
 import { fetchAllEvents } from "@/actions/fetch.action";
-import { auth } from "@/auth";
 import { CardDiv } from "@/components/Shared/Card";
 import { sedgwick } from "@/utils/fonts";
 
-const Cultural = async() => {
-  
-  const events = await fetchAllEvents("cultural")
-  const session = await auth()
+const Cultural = () => {
+  const [events, setEvents] = useState<any[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadEvents = async () => {
+      const allEvents = await fetchAllEvents("cultural");
+      setEvents(allEvents || []);
+      setFilteredEvents(allEvents || []);
+      setLoading(false);
+    };
+    loadEvents();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setFilteredEvents(events);
+    } else {
+      const query = searchQuery.toLowerCase();
+      setFilteredEvents(
+        events.filter(
+          (e) =>
+            e.eventName.toLowerCase().includes(query) ||
+            e.eventDescription.toLowerCase().includes(query) ||
+            e.venue.toLowerCase().includes(query)
+        )
+      );
+    }
+  }, [searchQuery, events]);
+
+  if (loading) {
+    return (
+      <div className="mt-[125px] min-h-[90vh] relative flex items-center justify-center">
+        <div className="animate-pulse text-white">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-[125px] min-h-[90vh] relative">
@@ -32,13 +70,16 @@ const Cultural = async() => {
           />
         </Container>
       </div>
-
-      {/* <div className="mt-4 md:mt-10 relative">
-        <Image src={BandPic} alt="" className="object-cover" />
-        <Image src={RevolutionImg} alt="" className="absolute bottom-4 left-[50%] translate-x-[-50%]" />
-        <div className="bg-red-600 w-full h-[80%] absolute bottom-0 z-[-1]" />
-      </div> */}
       <Container>
+        <div className="mb-6 relative z-50">
+          <Input
+            placeholder="Search cultural events..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500 w-full"
+            style={{ touchAction: 'manipulation' }}
+          />
+        </div>
         <div className="min-h-screen relative">
           <Image
             src={HexagonWhite}
@@ -57,7 +98,7 @@ const Cultural = async() => {
           />
           <div className="bg-white/50 h-full w-[1px] absolute top-0 left-[-8px] md:left-[50%] md:translate-x-[-50%] animate-pulse" />
           <div className=" flex flex-col gap-1">
-          {events?.map((event, i) => {
+          {filteredEvents?.map((event, i) => {
               if (i % 2 === 0) {
                 return (
                   <CardDiv
@@ -68,6 +109,8 @@ const Cultural = async() => {
                     DateContent={event.eventDate}
                     uniqueId={event.uniqueId!}
                     nonRegisterable={event.nonRegisterable}
+                    poster={event.poster}
+                    eventCategory="cultural"
                   />
                 );
               } else {
@@ -79,6 +122,8 @@ const Cultural = async() => {
                     DateContent={event.eventDate}
                     uniqueId={event.uniqueId!}
                     nonRegisterable={event.nonRegisterable}
+                    poster={event.poster}
+                    eventCategory="cultural"
                   />
                 );
               }

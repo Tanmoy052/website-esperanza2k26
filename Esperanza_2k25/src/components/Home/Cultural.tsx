@@ -89,12 +89,17 @@ const Cultural = () => {
         </div>
 
         <div className="flex-1 min-w-[300px] relative top-20 left-[0] md:left-[40]">
-          <p className={`${sedgwick.className} text-lg text-gray-200 leading-relaxed underdog`}>
-          The cultural squad is all set to present a wondrous cultural extravaganza replete with creativity and artistry. 
-          brace up to get the spark of melodies, beats, rhythm, steps and arts ignited altogether.
-          We welcome everyone to the cultural melting pot to showcase your recreative and extra-curricular talents and 
-          inspire the young minds to step beyond the box and fuel the passion - and celebrate all beautiful souls of arts .
-          </p>
+<p className={`${sedgwick.className} text-lg text-gray-200 leading-relaxed underdog`}>
+  Welcome to Esperanza’26 — the Tech Cum Cultural Fest of Cooch Behar Government Engineering College (CGEC), from 16th–20th June 2026.
+
+  Experience an exciting blend of technology, creativity, and culture featuring{" "}
+  
+  <span className="bg-white/10 px-2 py-1 rounded-md text-white">
+   drama, music, dance, fashion, art, and live performances
+  </span>.
+  
+  Esperanza’26 is not just a fest — it’s a celebration of culture, creativity, talent, and unforgettable memories.
+</p>
           <Link href="/events/cultural" className="inline-block">
           <Image
           src={explore}

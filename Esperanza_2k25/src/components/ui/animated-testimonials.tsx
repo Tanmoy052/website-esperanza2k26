@@ -19,6 +19,10 @@ export const AnimatedTestimonials = ({
   const [active, setActive] = useState(0);
   const [rotationCache, setRotationCache] = useState<number[]>([]);
 
+  if (!testimonials || testimonials.length === 0) {
+    return null;
+  }
+
   const handleNext = () => {
     setActive((prev) => (prev + 1) % testimonials.length);
   };
@@ -30,11 +34,11 @@ export const AnimatedTestimonials = ({
   const isActive = (index: number) => index === active;
 
   useEffect(() => {
-    if (autoplay) {
+    if (autoplay && testimonials.length > 0) {
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, testimonials.length]);
 
   // Cache random rotateY values after mount
   useEffect(() => {

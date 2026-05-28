@@ -17,5 +17,5 @@ const contactMessageSchema = new Schema({
 });
 
 export const ContactMessage =
-  mongoose.models.ContactMessage ||
+  mongoose.models?.ContactMessage ||
   mongoose.model("ContactMessage", contactMessageSchema);

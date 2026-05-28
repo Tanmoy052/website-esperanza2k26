@@ -171,6 +171,8 @@ export function CardDiv({
   DateContent,
   uniqueId,
   nonRegisterable = false,
+  poster,
+  eventCategory,
 }: {
   reverseAlign?: boolean;
   eventName: string;
@@ -178,6 +180,8 @@ export function CardDiv({
   DateContent: string;
   uniqueId: number;
   nonRegisterable?: boolean;
+  poster?: string;
+  eventCategory?: string;
 }) {
   const router = useRouter();
   const { data: session } = useSession();
@@ -194,7 +198,7 @@ export function CardDiv({
 
   const staticEvent = staticEventsData.find((e) => e.uniqueId === uniqueId);
   const redirect = staticEvent?.redirect;
-  const poster = staticEvent?.poster;
+  const finalPoster = poster || staticEvent?.poster;
 
   const handleRegisterForEvent = async () => {
     if (isRegistering) return;
@@ -273,7 +277,7 @@ export function CardDiv({
         </p>
         <div className="flex gap-4">
           <Link
-            href={redirect ? redirect : ""}
+            href={redirect || (eventCategory ? `/events/${eventCategory}/${uniqueId}` : "#")}
             className={`${sedgwick.className} relative inline-flex items-center justify-center px-6 py-2.5 font-bold text-white transition-all duration-200 bg-gradient-to-r from-blue-600 to-purple-600 shadow-[0_4px_0_0_#581c87] hover:shadow-[0_2px_0_0_#581c87] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] rounded-lg`}
           >
             Read More...
@@ -290,9 +294,9 @@ export function CardDiv({
         </div>
       </div>
       <div className="md:w-1/2 w-full h-full flex justify-center items-center px-10 md:px-0">
-        {poster ? (
+        {finalPoster ? (
           <Image
-            src={poster}
+            src={finalPoster}
             alt={eventName}
             width={500}
             height={500}

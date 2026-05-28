@@ -75,13 +75,19 @@ const Tech = () => {
       <div className="flex flex-col md:flex-row gap-20 items-center">
 
         <div className="flex-1 min-w-[300px] relative top-20">
-          <p className={`${sedgwick.className} text-lg text-gray-200 leading-relaxed underdog`}>
-          Step into the electrifying Tech Phase of Esperanza 2026 — a three-day extravaganza (April 22nd–24th) where innovation takes center stage! 
-          Gear up for adrenaline-pumping hackathons, brain-teasing coding challenges, intricate bridge-making battles, mind-blowing robotics competitions, and many more events designed to test your creativity, logic, and engineering prowess. 
-          Whether you're a seasoned coder, an aspiring engineer, or a curious learner, there’s a challenge waiting just for you. 
-          This is more than a competition—it’s a celebration of ideas, collaboration, and pushing the boundaries of what’s possible. 
-          Come build, break, innovate, and ignite the future—because tech isn't just an event here, it's an experience!
-          </p>
+<p className={`${sedgwick.className} text-lg text-gray-200 leading-relaxed underdog`}>
+  Welcome to Esperanza’26 — the Tech Cum Cultural Fest of Cooch Behar Government Engineering College (CGEC), from 16th–20th June 2026.
+
+  Experience an exciting blend of technology, creativity, and culture. The first three days will feature technical events like{" "}
+  
+  <span className="bg-white/10 px-2 py-1 rounded-md text-white">
+    hackathons, coding, robotics, esports, quizzes
+  </span>
+  
+  {" "}and many more innovation-driven challenges.
+
+  Esperanza’26 is not just a fest — it’s a celebration of talent, innovation, and unforgettable memories.
+</p>
           <Link href="/events/technical" className="inline-block">
           <Image
             src={explore}
