@@ -40,6 +40,12 @@ const userSchema = new Schema({
       unique: true,
     },
   },
+  resetPasswordOTP: {
+    type: String,
+  },
+  resetPasswordOTPExpires: {
+    type: Date,
+  },
   role: {
     type: String,
     enum: ["user", "admin"],

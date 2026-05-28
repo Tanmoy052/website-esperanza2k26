@@ -7,14 +7,18 @@ import { sedgwick, roboto } from "@/utils/fonts";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import {
-  FaEye,
-  FaEyeSlash,
-} from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import customSwal from "@/utils/swal";
+import ForgotPasswordFlow from "./ForgotPasswordFlow";
 
 const LoginSignUpForm = () => {
   const [loginTabActive, SetLoginTabActive] = useState<boolean>(true);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+
+  if (isForgotPassword) {
+    return <ForgotPasswordFlow onBack={() => setIsForgotPassword(false)} />;
+  }
+
   return (
     <>
       <div className="flex justify-center gap-8 relative z-50">
@@ -35,12 +39,16 @@ const LoginSignUpForm = () => {
           Sign Up
         </button>
       </div>
-      {loginTabActive ? <LoginForm /> : <SignUpForm />}
+      {loginTabActive ? (
+        <LoginForm onForgotPassword={() => setIsForgotPassword(true)} />
+      ) : (
+        <SignUpForm />
+      )}
     </>
   );
 };
 
-const LoginForm = () => {
+const LoginForm = ({ onForgotPassword }: { onForgotPassword: () => void }) => {
   const router = useRouter();
   const { update } = useSession();
   const [loginCredentials, setLoginCredentials] = useState({
@@ -51,20 +59,22 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleFormSubmit = async () => {
-    const result = await login(loginCredentials)
+    const result = await login(loginCredentials);
 
-    if(!result?.error){
-      customSwal.fire({
-        title: "Login Successful",
-        text: `Welcome back!`,
-        icon: "success",
-        confirmButtonText: "OK",
-      }).then(async () => {
-        setLoginCredentials({ email: "", password: "" });
-        await update();
-        router.refresh();
-        router.push("/");
-      });
+    if (!result?.error) {
+      customSwal
+        .fire({
+          title: "Login Successful",
+          text: `Welcome back!`,
+          icon: "success",
+          confirmButtonText: "OK",
+        })
+        .then(async () => {
+          setLoginCredentials({ email: "", password: "" });
+          await update();
+          router.refresh();
+          router.push("/");
+        });
     } else {
       customSwal.fire({
         title: "Login Failed",
@@ -73,10 +83,13 @@ const LoginForm = () => {
         confirmButtonText: "OK",
       });
     }
-  }
+  };
 
   return (
-    <form action={handleFormSubmit} className="relative z-50 h-full flex flex-col p-4 sm:p-6 md:py-8 md:px-12 max-w-[500px] m-auto gap-3 sm:gap-5 md:gap-8">
+    <form
+      action={handleFormSubmit}
+      className="relative z-50 h-full flex flex-col p-4 sm:p-6 md:py-8 md:px-12 max-w-[500px] m-auto gap-3 sm:gap-5 md:gap-8"
+    >
       <input
         type="email"
         placeholder="Enter your Email address"
@@ -109,6 +122,15 @@ const LoginForm = () => {
           {showPassword ? <FaEyeSlash /> : <FaEye />}
         </button>
       </div>
+      <div className="flex justify-end -mt-4">
+        <button
+          type="button"
+          onClick={onForgotPassword}
+          className={`text-white/70 hover:text-white text-sm ${roboto.className}`}
+        >
+          Forgot Password?
+        </button>
+      </div>
       <button
         type="submit"
         className={`bg-red-700 rounded-2xl cursor-pointer px-6 py-4 ${sedgwick.className}`}
@@ -128,45 +150,47 @@ const SignUpForm = () => {
       year: "",
       department: "",
       rollNumber: "",
-      "credentials": {
+      credentials: {
         email: "",
         password: "",
         phoneNumber: "",
       },
-    }
+    },
   );
 
-  const handleFormSubmit = async()=>{
-    if(signUpCredentials.department==="" || signUpCredentials.year===""){
+  const handleFormSubmit = async () => {
+    if (signUpCredentials.department === "" || signUpCredentials.year === "") {
       customSwal.fire({
-        title : "All fields are requied",
-        text : "Year and Department are requierd",
-        icon : "warning"
-      })
-      return
+        title: "All fields are requied",
+        text: "Year and Department are requierd",
+        icon: "warning",
+      });
+      return;
     }
-    
+
     const response = await signUp(signUpCredentials);
-    if(response?.success){
-      customSwal.fire({
-        title: "User Created Successfully",
-        text: `User Email: ${response?.userEmail}`,
-        icon: "success",
-        confirmButtonText: "OK",
-      }).then(() => {
-        setSignUpCredentials({
-          name: "",
-          year: "",
-          department: "",
-          rollNumber: "",
-          credentials: {
-            email: "",
-            password: "",
-            phoneNumber: "",
-          },
+    if (response?.success) {
+      customSwal
+        .fire({
+          title: "User Created Successfully",
+          text: `User Email: ${response?.userEmail}`,
+          icon: "success",
+          confirmButtonText: "OK",
         })
-      })
-    }else{
+        .then(() => {
+          setSignUpCredentials({
+            name: "",
+            year: "",
+            department: "",
+            rollNumber: "",
+            credentials: {
+              email: "",
+              password: "",
+              phoneNumber: "",
+            },
+          });
+        });
+    } else {
       customSwal.fire({
         title: "User Creation Failed",
         text: response?.error || "Something went wrong",
@@ -174,10 +198,13 @@ const SignUpForm = () => {
         confirmButtonText: "OK",
       });
     }
-  }
+  };
 
   return (
-    <form action={handleFormSubmit}  className="relative z-50 h-full flex flex-col p-4 sm:p-6 md:py-8 md:px-12 max-w-[500px] m-auto gap-3 sm:gap-5 md:gap-8">
+    <form
+      action={handleFormSubmit}
+      className="relative z-50 h-full flex flex-col p-4 sm:p-6 md:py-8 md:px-12 max-w-[500px] m-auto gap-3 sm:gap-5 md:gap-8"
+    >
       <input
         type="email"
         placeholder="Email"
@@ -261,10 +288,10 @@ const SignUpForm = () => {
         onChange={(e) =>
           setSignUpCredentials({
             ...signUpCredentials,
-            credentials : {
+            credentials: {
               ...signUpCredentials.credentials,
-              phoneNumber : e.target.value
-            }
+              phoneNumber: e.target.value,
+            },
           })
         }
       />
