@@ -8,13 +8,7 @@ const LoaderComponent = () => {
   const ringsRef = useRef<HTMLDivElement>(null);
   const lettersRef = useRef<HTMLDivElement>(null);
   const dripRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(true);
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 4000);
-
     const word = "ESPERANZA";
 
     // Letters
@@ -25,8 +19,8 @@ const LoaderComponent = () => {
         const span = document.createElement("span");
         span.className = "fire-letter";
         span.textContent = ch;
-        span.style.setProperty("--dur", (2.6 + Math.random() * 1.4) + "s");
-        span.style.setProperty("--delay", (i * 0.22) + "s");
+        span.style.setProperty("--dur", 2.6 + Math.random() * 1.4 + "s");
+        span.style.setProperty("--delay", i * 0.22 + "s");
         lettersEl.appendChild(span);
       });
     }
@@ -40,8 +34,8 @@ const LoaderComponent = () => {
         const d = document.createElement("div");
         d.className = "drip-seg";
         d.style.setProperty("--bh", h + "px");
-        d.style.setProperty("--dd", (1.6 + Math.random() * 1.2) + "s");
-        d.style.setProperty("--dl", (i * 0.13) + "s");
+        d.style.setProperty("--dd", 1.6 + Math.random() * 1.2 + "s");
+        d.style.setProperty("--dl", i * 0.13 + "s");
         dripEl.appendChild(d);
       });
     }
@@ -132,12 +126,8 @@ const LoaderComponent = () => {
       }
     }
 
-    return () => clearTimeout(timer);
+    return () => {};
   }, []);
-
-  if (!isVisible) {
-    return null;
-  }
 
   return (
     <>
@@ -288,13 +278,22 @@ const LoaderComponent = () => {
         </svg>
 
         {/* Stars */}
-        <div ref={starsRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />
+        <div
+          ref={starsRef}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+        />
 
         {/* Embers */}
-        <div ref={embersRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />
+        <div
+          ref={embersRef}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+        />
 
         {/* Heat rings */}
-        <div ref={ringsRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />
+        <div
+          ref={ringsRef}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+        />
 
         {/* Main content */}
         <div
@@ -311,7 +310,11 @@ const LoaderComponent = () => {
           {/* ESPERANZA letters */}
           <div
             ref={lettersRef}
-            style={{ display: "flex", alignItems: "center", flexWrap: "nowrap" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "nowrap",
+            }}
           />
 
           {/* Drip bar */}
